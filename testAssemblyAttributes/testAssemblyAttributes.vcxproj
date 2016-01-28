@@ -138,9 +138,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="ReadMe.txt" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="exception.h" />
     <ClInclude Include="handle.h" />
     <ClInclude Include="helper.h" />
