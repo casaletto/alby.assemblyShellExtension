@@ -41,9 +41,16 @@ namespace alby
 				stream( head, tail ... ) ;
 			}
 
-			void console()
+			void stdoutput()
 			{
-				std::wcout << this->wstring() << std::endl ;
+				auto str = alby::stringHelper::ws2s( this->wstring() ) ;
+				std::cout << str << std::endl ;
+			}
+
+			void stderror()
+			{
+				auto str = alby::stringHelper::ws2s(this->wstring());
+				std::cerr << str << std::endl;
 			}
 
 			void debug()

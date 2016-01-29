@@ -6,9 +6,6 @@
 #include "process.h"
 #include "helper.h"
 
-//ALBY windows error function
-//ALBY __FILE__ __LINE__
-
 using namespace alby ;
 
 process::process()
@@ -45,10 +42,10 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	this->setStderr( std::wstring() ) ;
  
 	if ( exe.size() == 0 )
-		throw alby::exception( L"No executable passed in.", __FILE__, __LINE__ ) ;
+		throw alby::exception( L"No executable file was passed in.", __FILE__, __LINE__ ) ;
 
 	if ( parameter.size() == 0)
-		throw alby::exception( L"No parameter passed in.",  __FILE__, __LINE__ ) ;
+		throw alby::exception( L"No parameter was passed in.",  __FILE__, __LINE__ ) ;
 
 	// format command line with quotes "exe" "param"
 	auto q = L"\"" ;

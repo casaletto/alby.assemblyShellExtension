@@ -27,38 +27,38 @@ int wmain( int argc, wchar_t* argv[] )
 		rc = pr.exec( exe, parameter ) ;
 
 		// dump output
-		auto theStdout = pr.getStdout() ;
-		auto theStderr = pr.getStderr() ;
+		auto theStdout = alby::stringHelper::trim( pr.getStdout() ) ;
+		auto theStderr = alby::stringHelper::trim( pr.getStderr() ) ;
 
 		// process the output 
 		if ( theStdout.size() > 0 )
 			std::cout << alby::stringHelper::ws2s( theStdout ) << std::endl ;
 
 		if ( theStderr.size() > 0 )
-			std::cout << alby::stringHelper::ws2s( theStderr ) << std::endl ;
+			std::cerr << alby::stringHelper::ws2s( theStderr ) << std::endl ;
 
 		if ( rc != 0 )
-			throw alby::exception( L"child process returned non zero return code" ) ;
+			throw alby::exception( L"The child process returned a non zero return code.", __FILE__, __LINE__ ) ;
 
-		rc = 0 ;
+		rc = 0 ;  
 	}
-	catch( const alby::exception& ex ) 
+	catch( const alby::exception& ex )     
 	{
 		err = alby::sprintf( L"EXCEPTION\n", ex.what() ) ;
 		err.debug();
-		err.console();
+		err.stderror();
 	}
 	catch( const std::exception& ex ) 
 	{
 		err = alby::sprintf( L"EXCEPTION\n", ex.what() ) ;
 		err.debug();
-		err.console();
+		err.stderror();
 	}
 	catch( ... ) 
 	{
 		err = L"EXCEPTION\n..." ;
 		err.debug();
-		err.console();
+		err.stderror();
 	}
 
 	msg = alby::sprintf( L"testAssemblyAttributes [finish] [", rc, L"]" );
