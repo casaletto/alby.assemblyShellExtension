@@ -5,6 +5,17 @@
 #include "process.h"
 #include "helper.h" 
 
+/*
+
+alby's c++ wide character best bet:
+
+	- use windows xxxW functions whereever possible
+	- use std::wstring internally
+	- use std::string  externally, ie cout, file io
+	- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
+
+*/
+
 int wmain( int argc, wchar_t* argv[] )
 {
 	int rc = 1 ;
@@ -24,21 +35,28 @@ int wmain( int argc, wchar_t* argv[] )
 		auto args = h.argvToVector( argc, argv ) ;
 
 		h.getArguments( args, exe, parameter ) ;
-		rc = pr.exec( exe, parameter ) ;
+		auto childrc = pr.exec( exe, parameter ) ;
 
 		// dump output
 		auto theStdout = alby::stringHelper::trim( pr.getStdout() ) ;
 		auto theStderr = alby::stringHelper::trim( pr.getStderr() ) ;
 
 		// process the output 
-		if ( theStdout.size() > 0 )
-			std::cout << alby::stringHelper::ws2s( theStdout ) << std::endl ;
-
 		if ( theStderr.size() > 0 )
-			std::cerr << alby::stringHelper::ws2s( theStderr ) << std::endl ;
+			throw alby::exception( theStderr, __FILE__, __LINE__ ) ;
 
-		if ( rc != 0 )
-			throw alby::exception( L"The child process returned a non zero return code.", __FILE__, __LINE__ ) ;
+		if ( childrc != 0 )
+			throw alby::exception( L"The child process returned a non zero exit code of " + std::to_wstring( childrc ), __FILE__, __LINE__ ) ;
+
+		// transform the flat string to a dictionary
+		auto dic = alby::helper::toMap(theStdout, L'\n', L'|' ) ;
+	
+		// dump the dic, this is the money shot
+		for ( auto k : dic )
+		{
+			auto str = alby::sprintf( L"#", k.first, L"# = [", k.second, L"]" ) ;
+			str.stdoutput() ;
+		}
 
 		rc = 0 ;  
 	}

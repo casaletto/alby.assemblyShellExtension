@@ -50,3 +50,18 @@ std::wstring stringHelper::trim( const std::wstring& wstr )
 	return rtrim( ltrim( wstr ) ) ;
 }
 
+std::vector<std::wstring> stringHelper::split( const std::wstring& wstr, wchar_t delimiter )
+{
+	std::vector<std::wstring> result ;
+
+	std::wstringstream ss( wstr ) ;
+	std::wstring item ;
+
+	while ( std::getline( ss, item, delimiter ) )
+		result.push_back( item ) ;
+
+	return result ;
+}
+
+
+

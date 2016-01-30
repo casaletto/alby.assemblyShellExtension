@@ -35,3 +35,31 @@ void helper::getArguments( std::vector<std::wstring>& args, std::wstring& inspec
 		 inspectee = args[2] ;
 }
 
+std::map<std::wstring, std::wstring> helper::toMap( const std::wstring str, wchar_t majorDelim, wchar_t minorDelim )
+{
+	std::map<std::wstring, std::wstring> dic ;
+
+	auto list = alby::stringHelper::split( str, majorDelim ) ;
+
+	for ( auto line : list )
+	{
+		auto line2 = alby::stringHelper::trim( line ) ;
+		if ( line2.size() == 0 ) continue ;
+
+		auto kvpair = alby::stringHelper::split( line2, minorDelim ) ;
+
+		if ( kvpair.size() == 0 ) continue ;
+		if ( kvpair.size() == 1 )
+			 kvpair.push_back( std::wstring() ) ;
+
+		auto key   = alby::stringHelper::trim( kvpair[0] ) ;
+		auto value = alby::stringHelper::trim( kvpair[1] ) ;
+	
+		if ( key.size() == 0 ) continue ;
+
+		dic[ key ] = value ;
+	}
+
+	return dic ;
+}
+

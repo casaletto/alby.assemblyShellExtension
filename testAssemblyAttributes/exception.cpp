@@ -64,7 +64,7 @@ namespace alby
 
 	std::wstring exception::getLastError()
 	{
-		WCHAR sz[ BUFFER_SIZE+10 ] ;
+		wchar_t sz[ BUFFER_SIZE+10 ] ;
 		::ZeroMemory( sz, sizeof(sz) ) ;
 
 		auto errorCode = ::GetLastError() ;

@@ -35,6 +35,11 @@ namespace alby
 				return _ss.rdbuf()->str() ;
 			}
 
+			std::string string()
+			{		
+				return alby::stringHelper::ws2s( this->wstring() ) ;
+			}
+
 			template<typename U, typename ... T>
 			sprintf( const U& head, const T& ... tail )
 			{
