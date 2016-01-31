@@ -5,6 +5,9 @@
 #include "process.h"
 #include "helper.h" 
 
+//ALBY move the files to common folder
+//so that the atl stuff can get at it /lib ? /src?
+
 /*
 
 alby's c++ wide character best bet:

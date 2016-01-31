@@ -106,7 +106,7 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	b = ::CreateProcessW
 	(
 		NULL,
-		(LPWSTR) cmdline.wstring().c_str() ,     
+		(LPWSTR) cmdline.ws().c_str() ,     
 		NULL,
 		NULL,
 		TRUE, // inherit handles

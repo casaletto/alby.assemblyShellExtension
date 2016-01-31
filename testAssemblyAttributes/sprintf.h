@@ -30,14 +30,14 @@ namespace alby
 				return *this;
 			}
 
-			std::wstring wstring()
+			std::wstring ws()
 			{
 				return _ss.rdbuf()->str() ;
 			}
 
-			std::string string()
+			std::string s()
 			{		
-				return alby::stringHelper::ws2s( this->wstring() ) ;
+				return alby::stringHelper::ws2s( this->ws() ) ;
 			}
 
 			template<typename U, typename ... T>
@@ -48,19 +48,17 @@ namespace alby
 
 			void stdoutput()
 			{
-				auto str = alby::stringHelper::ws2s( this->wstring() ) ;
-				std::cout << str << std::endl ;
+				std::cout << this->s() << std::endl ;
 			}
 
 			void stderror()
 			{
-				auto str = alby::stringHelper::ws2s(this->wstring());
-				std::cerr << str << std::endl;
+				std::cerr << this->s() << std::endl;
 			}
 
 			void debug()
 			{
-				::OutputDebugStringW( this->wstring().c_str() );
+				::OutputDebugStringW( this->ws().c_str() );
 			}
 
 		protected:
