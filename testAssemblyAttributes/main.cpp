@@ -1,5 +1,5 @@
 ﻿#include "stdafx.h"
-#include "stringHelper.h" 
+#include "..\libAssemblyAttributes\stringHelper.h"
 #include "exception.h" 
 #include "sprintf.h"
 #include "process.h"
@@ -11,7 +11,7 @@ namespace lib = alby::assemblyAttributes::lib ;
 
 alby's c++ wide character best bet:
 
-- use windows xxxW functions whereever possible
+- use windows xxxW functions whereever possible 
 - use std::wstring internally
 - use std::string  externally, ie cout, file io
 - repeat: never ever send utf16 wstring's to io, only ever send utf8 string's

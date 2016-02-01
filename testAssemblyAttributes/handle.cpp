@@ -1,6 +1,5 @@
 #include "stdafx.h"
-#include "stdafx.h"
-#include "stringHelper.h" 
+#include "..\libAssemblyAttributes\stringHelper.h"
 #include "exception.h" 
 #include "handle.h"
 
