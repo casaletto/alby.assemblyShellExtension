@@ -3,7 +3,7 @@
 #include "exception.h" 
 #include "helper.h"
 
-using namespace alby ;
+using namespace alby::assemblyAttributes::lib ;
 
 helper::helper()
 {
@@ -39,21 +39,21 @@ std::map<std::wstring, std::wstring> helper::toMap( const std::wstring str, wcha
 {
 	std::map<std::wstring, std::wstring> dic ;
 
-	auto list = alby::stringHelper::split( str, majorDelim ) ;
+	auto list = lib::stringHelper::split( str, majorDelim ) ;
 
 	for ( auto line : list )
 	{
-		auto line2 = alby::stringHelper::trim( line ) ;
+		auto line2 = lib::stringHelper::trim( line ) ;
 		if ( line2.size() == 0 ) continue ;
 
-		auto kvpair = alby::stringHelper::split( line2, minorDelim ) ;
+		auto kvpair = lib::stringHelper::split( line2, minorDelim ) ;
 
 		if ( kvpair.size() == 0 ) continue ;
 		if ( kvpair.size() == 1 )
 			 kvpair.push_back( std::wstring() ) ;
 
-		auto key   = alby::stringHelper::trim( kvpair[0] ) ;
-		auto value = alby::stringHelper::trim( kvpair[1] ) ;
+		auto key   = lib::stringHelper::trim( kvpair[0] ) ;
+		auto value = lib::stringHelper::trim( kvpair[1] ) ;
 	
 		if ( key.size() == 0 ) continue ;
 

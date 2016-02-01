@@ -6,7 +6,7 @@
 #include "process.h"
 #include "helper.h"
 
-using namespace alby ;
+using namespace alby::assemblyAttributes::lib ;
 
 process::process()
 {
@@ -42,14 +42,14 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	this->setStderr( std::wstring() ) ;
  
 	if ( exe.size() == 0 )
-		throw alby::exception( L"No executable file was passed in.", __FILE__, __LINE__ ) ;
+		throw lib::exception(L"No executable file was passed in.", __FILE__, __LINE__);
 
 	if ( parameter.size() == 0)
-		throw alby::exception( L"No parameter was passed in.",  __FILE__, __LINE__ ) ;
+		throw lib::exception(L"No parameter was passed in.", __FILE__, __LINE__);
 
 	// format command line with quotes "exe" "param"
 	auto q = L"\"" ;
-	auto cmdline = alby::sprintf( q, exe, q, L" ", q, parameter, q ) ;
+	auto cmdline = lib::sprintf(q, exe, q, L" ", q, parameter, q);
 	cmdline.debug() ;
 
 	// create the pipes
@@ -67,28 +67,28 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	// stdout
 	auto b = ::CreatePipe( &hChildStdoutRead, &hChildStdoutWrite, &sa, 0 ) ;
 	if ( b == 0 )
-		throw alby::exception( L"CreatePipe() failed.", __FILE__, __LINE__ );
+		throw lib::exception(L"CreatePipe() failed.", __FILE__, __LINE__);
 
 	// safe handle cleanup
-	alby::handle handleChildStdoutRead ( hChildStdoutRead  ) ;
-	alby::handle handleChildStdoutWrite( hChildStdoutWrite ) ;
+	lib::handle handleChildStdoutRead ( hChildStdoutRead  ) ;
+	lib::handle handleChildStdoutWrite( hChildStdoutWrite ) ;
 
 	b = ::SetHandleInformation( hChildStdoutRead, HANDLE_FLAG_INHERIT, 0 ) ;
 	if ( b == 0 )
-		throw alby::exception( L"SetHandleInformation() failed.", __FILE__, __LINE__ ) ;
+		throw lib::exception(L"SetHandleInformation() failed.", __FILE__, __LINE__);
 
 	// stderr
 	b = ::CreatePipe( &hChildStderrRead, &hChildStderrWrite, &sa, 0 ) ;
 	if ( b == 0 )
-		throw alby::exception( L"CreatePipe() failed.", __FILE__, __LINE__ );
+		throw lib::exception(L"CreatePipe() failed.", __FILE__, __LINE__);
 
 	// safe handle cleanup
-	alby::handle handleChildStderrRead ( hChildStderrRead  ) ;
-	alby::handle handleChildStderrWrite( hChildStderrWrite ) ;
+	lib::handle handleChildStderrRead ( hChildStderrRead  ) ;
+	lib::handle handleChildStderrWrite( hChildStderrWrite ) ;
 
 	b = ::SetHandleInformation( hChildStderrRead, HANDLE_FLAG_INHERIT, 0 ) ;
 	if ( b == 0 )
-		throw alby::exception( L"SetHandleInformation() failed.", __FILE__, __LINE__ ) ;
+		throw lib::exception(L"SetHandleInformation() failed.", __FILE__, __LINE__);
 
 	// fire child process
 	STARTUPINFO si;
@@ -118,11 +118,11 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	) ;
 
 	if ( b == 0 )
-		throw alby::exception( L"CreateProcessW() failed.", __FILE__, __LINE__ ) ; 
+		throw lib::exception(L"CreateProcessW() failed.", __FILE__, __LINE__);
 
 	// safe handle cleanup
-	alby::handle handleProcess( pi.hProcess ) ;
-	alby::handle handleThread( pi.hThread ) ;
+	lib::handle handleProcess( pi.hProcess ) ;
+	lib::handle handleThread( pi.hThread ) ;
 
 	// now we have to close child's write handles !
 	handleChildStdoutWrite.close();
@@ -136,8 +136,8 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 
 	this->getProcessOutput( hChildStdoutRead, hChildStderrRead, strStdout, strStderr ) ;
 
-	this->setStdout( stringHelper::s2ws( strStdout ) ) ;
-	this->setStderr( stringHelper::s2ws( strStderr ) ) ;
+	this->setStdout( lib::stringHelper::s2ws(strStdout));
+	this->setStderr( lib::stringHelper::s2ws(strStderr));
 
 	// wait for child process exit
 	DWORD rc = 1 ;
@@ -208,5 +208,4 @@ void process::getProcessOutput
 	strStdout = std::string( (char*) stdoutBytes.data() ) ;
 	strStderr = std::string( (char*) stderrBytes.data() ) ;
 }
-
 

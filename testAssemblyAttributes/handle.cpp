@@ -4,7 +4,7 @@
 #include "exception.h" 
 #include "handle.h"
 
-using namespace alby;
+using namespace alby::assemblyAttributes::lib ;
 
 handle::handle()
 {

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "stringHelper.h"
 
-using namespace alby ;
+using namespace alby::assemblyAttributes::lib ;
 
 stringHelper::stringHelper()
 {

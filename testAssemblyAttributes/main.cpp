@@ -5,32 +5,48 @@
 #include "process.h"
 #include "helper.h" 
 
-//ALBY move the files to common folder
-//so that the atl stuff can get at it /lib ? /src?
+namespace lib = alby::assemblyAttributes::lib ;
 
 /*
 
 alby's c++ wide character best bet:
 
-	- use windows xxxW functions whereever possible
-	- use std::wstring internally
-	- use std::string  externally, ie cout, file io
-	- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
+- use windows xxxW functions whereever possible
+- use std::wstring internally
+- use std::string  externally, ie cout, file io
+- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
 
 */
 
-int wmain( int argc, wchar_t* argv[] )
+
+//ALBY move the files to lib
+//alby.assemblyAttribubtes.lib
+// namespace alby::assemblyAttribubtes
+
+//atl component
+// alby.assemblyShellExtension.dll
+
+//ALBY namespces
+//helper.h namespace   alby.assemblyAttributes.lib
+
+
+// wmain: program entry point
+// must be a global function
+// cant be in a namespace
+// not even in the :: global namespace
+
+int wmain( int argc, wchar_t* argv[] ) 
 {
 	int rc = 1 ;
 
-	alby::helper  h   ;
-	alby::sprintf msg ;
-	alby::sprintf err ;
-	alby::process pr  ;
-	std::wstring  exe ;
-	std::wstring  parameter ;
+	lib::helper  h   ;
+	lib::sprintf msg ;
+	lib::sprintf err ;
+	lib::process pr  ;
+	std::wstring exe ;
+	std::wstring parameter ;
 
-	msg = alby::sprintf( L"testAssemblyAttributes [start]" ) ;
+	msg = lib::sprintf( L"testAssemblyAttributes [start]" ) ;
 	msg.debug() ;
 
 	try
@@ -41,37 +57,37 @@ int wmain( int argc, wchar_t* argv[] )
 		auto childrc = pr.exec( exe, parameter ) ;
 
 		// dump output
-		auto theStdout = alby::stringHelper::trim( pr.getStdout() ) ;
-		auto theStderr = alby::stringHelper::trim( pr.getStderr() ) ;
+		auto theStdout = lib::stringHelper::trim( pr.getStdout() ) ;
+		auto theStderr = lib::stringHelper::trim( pr.getStderr() ) ;
 
 		// process the output 
 		if ( theStderr.size() > 0 )
-			throw alby::exception( theStderr, __FILE__, __LINE__ ) ;
+			throw lib::exception( theStderr, __FILE__, __LINE__ ) ;
 
 		if ( childrc != 0 )
-			throw alby::exception( L"The child process returned a non zero exit code of " + std::to_wstring( childrc ), __FILE__, __LINE__ ) ;
+			throw lib::exception( L"The child process returned a non zero exit code of " + std::to_wstring( childrc ), __FILE__, __LINE__ ) ;
 
 		// transform the flat string to a dictionary
-		auto dic = alby::helper::toMap(theStdout, L'\n', L'|' ) ;
+		auto dic = lib::helper::toMap(theStdout, L'\n', L'|' ) ;
 	
 		// dump the dic, this is the money shot
 		for ( auto k : dic )
 		{
-			auto str = alby::sprintf( L"#", k.first, L"# = [", k.second, L"]" ) ;
+			auto str = lib::sprintf(L"#", k.first, L"# = [", k.second, L"]");
 			str.stdoutput() ;
 		}
 
 		rc = 0 ;  
 	}
-	catch( const alby::exception& ex )     
+	catch (const lib::exception& ex)
 	{
-		err = alby::sprintf( L"EXCEPTION\n", ex.what() ) ;
+		err = lib::sprintf(L"EXCEPTION\n", ex.what());
 		err.debug();
 		err.stderror();
 	}
 	catch( const std::exception& ex ) 
 	{
-		err = alby::sprintf( L"EXCEPTION\n", ex.what() ) ;
+		err = lib::sprintf(L"EXCEPTION\n", ex.what());
 		err.debug();
 		err.stderror();
 	}
@@ -82,7 +98,7 @@ int wmain( int argc, wchar_t* argv[] )
 		err.stderror();
 	}
 
-	msg = alby::sprintf( L"testAssemblyAttributes [finish] [", rc, L"]" );
+	msg = lib::sprintf(L"testAssemblyAttributes [finish] [", rc, L"]");
 	msg.debug() ;
 
 	return rc ;

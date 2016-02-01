@@ -2,20 +2,29 @@
 
 namespace alby
 {
-	class handle
+	namespace assemblyAttributes
 	{
-		protected:
-			HANDLE _handle ;
-			bool _set ;
+		namespace lib
+		{
+			class handle
+			{
+				protected:
+					HANDLE _handle ;
+					bool _set ;
 
-		public:
-			handle() ;
-			handle( HANDLE h ) ;
-			virtual ~handle() ;
+				public:
+					handle() ;
+					handle( HANDLE h ) ;
+					virtual ~handle() ;
 
-			HANDLE  getHandle() ;
-			bool isSet();
-			void close() ;
-	};
-}
+					HANDLE  getHandle() ;
+					bool isSet();
+					void close() ;
+			};
+
+		} // ns lib
+
+	} // ns assemblyAttributes
+
+} //  ns alby
 
