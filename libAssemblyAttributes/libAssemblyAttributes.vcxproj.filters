@@ -24,12 +24,45 @@
     <ClInclude Include="stringHelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="exception.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sprintf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="libmain.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="process.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="handle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="helper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="stringHelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="exception.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="libmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="process.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="handle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="helper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

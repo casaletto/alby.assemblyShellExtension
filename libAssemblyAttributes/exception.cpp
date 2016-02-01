@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\libAssemblyAttributes\stringHelper.h"
+#include "stringHelper.h"
 #include "exception.h"
 
 using namespace alby::assemblyAttributes::lib ;

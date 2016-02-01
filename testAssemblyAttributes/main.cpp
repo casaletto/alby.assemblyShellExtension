@@ -1,11 +1,15 @@
 ﻿#include "stdafx.h"
 #include "..\libAssemblyAttributes\stringHelper.h"
-#include "exception.h" 
-#include "sprintf.h"
-#include "process.h"
-#include "helper.h" 
+#include "..\libAssemblyAttributes\exception.h" 
+#include "..\libAssemblyAttributes\sprintf.h"
+#include "..\libAssemblyAttributes\process.h"
+#include "..\libAssemblyAttributes\helper.h" 
 
 namespace lib = alby::assemblyAttributes::lib ;
+
+//ALBY TO DO
+//atl component
+// alby.assemblyShellExtension.dll
 
 /*
 
@@ -17,18 +21,6 @@ alby's c++ wide character best bet:
 - repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
 
 */
-
-
-//ALBY move the files to lib
-//alby.assemblyAttribubtes.lib
-// namespace alby::assemblyAttribubtes
-
-//atl component
-// alby.assemblyShellExtension.dll
-
-//ALBY namespces
-//helper.h namespace   alby.assemblyAttributes.lib
-
 
 // wmain: program entry point
 // must be a global function

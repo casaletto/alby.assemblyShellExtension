@@ -1,6 +1,6 @@
 #pragma once
 
-namespace alby 
+namespace alby   
 {
 	namespace assemblyAttributes 
 	{
