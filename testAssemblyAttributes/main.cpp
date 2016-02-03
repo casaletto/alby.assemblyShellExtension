@@ -3,13 +3,15 @@
 #include "..\libAssemblyAttributes\exception.h" 
 #include "..\libAssemblyAttributes\sprintf.h"
 #include "..\libAssemblyAttributes\process.h"
+#include "..\libAssemblyAttributes\comEnvironment.h" 
 #include "..\libAssemblyAttributes\helper.h" 
 
 namespace lib = alby::assemblyAttributes::lib ;
 
+void testCom() ;
+
 //ALBY TO DO
-//atl component
-// alby.assemblyShellExtension.dll
+//test come stuff here
 
 /*
 
@@ -43,6 +45,10 @@ int wmain( int argc, wchar_t* argv[] )
 
 	try
 	{
+		testCom() ; //ALBY
+		return 0 ;
+
+
 		auto args = h.argvToVector( argc, argv ) ;
 
 		h.getArguments( args, exe, parameter ) ;
@@ -96,3 +102,50 @@ int wmain( int argc, wchar_t* argv[] )
 	return rc ;
 }
 
+#define MY_DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) const GUID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
+
+
+MY_DEFINE_GUID(CLSID_ALBY, 0xFF000017, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
+
+
+void testCom()
+{
+	//https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
+
+	try
+	{
+		lib::comEnvironment com ;
+
+		CComPtr<IUnknown> punk ;
+		auto hr = punk.CoCreateInstance( CLSID_StaticDib ) ; //CLSID_ALBY ) ; //CLSID_StaticDib );
+		if (FAILED(hr))
+			throw _com_error(hr);
+
+		if (punk.p == nullptr)
+			throw lib::exception(L"null ptr punk", __FILE__, __LINE__ );
+
+		auto msg = lib::sprintf( punk.p ) ;
+		msg.stdoutput() ;
+
+		CComQIPtr<IDataObject> pdata = punk;
+		if ( pdata.p == nullptr ) 
+			throw lib::exception( L"null ptr pdata", __FILE__, __LINE__ ) ; 
+
+		msg = lib::sprintf( pdata.p ) ;
+		msg.stdoutput();
+
+		CComQIPtr<IAccessible> pacc = pdata ;
+		if ( pacc.p == nullptr )
+			throw lib::exception( L"null ptr pacc", __FILE__, __LINE__);
+
+		msg = lib::sprintf( pacc.p ) ;
+		msg.stdoutput();
+	}
+	catch( const _com_error& ex )
+	{
+		auto msg = lib::sprintf( L"0x", std::hex, ex.Error(), L" ", ex.ErrorMessage() ) ;
+
+		throw lib::exception( msg.ws(), __FILE__, __LINE__ ) ;
+	}
+
+}

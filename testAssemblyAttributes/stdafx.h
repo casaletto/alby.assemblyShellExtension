@@ -6,10 +6,11 @@
 #include <tchar.h>
 #include <io.h>
 #include <fcntl.h>
-#include <atlbase.h>
-#include <atlconv.h>
 
 #include <windows.h>
+#include <comdef.h>
+#include <atlbase.h>
+#include <atlconv.h>
 
 #include <string>
 #include <iostream>

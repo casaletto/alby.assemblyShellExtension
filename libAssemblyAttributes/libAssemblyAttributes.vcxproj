@@ -142,6 +142,7 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="comEnvironment.h" />
     <ClInclude Include="exception.h" />
     <ClInclude Include="handle.h" />
     <ClInclude Include="helper.h" />
@@ -153,6 +154,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="comEnvironment.cpp" />
     <ClCompile Include="exception.cpp" />
     <ClCompile Include="handle.cpp" />
     <ClCompile Include="helper.cpp" />

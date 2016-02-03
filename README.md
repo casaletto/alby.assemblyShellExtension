@@ -32,11 +32,11 @@ bin\alby.assemblyAttributes.exe.config
 bin\the atl dll TO DO
 
 
-# how do i run the test program?
+# what's an example of running the test program?
 
 C:\albyStuff\development\alby.assemblyShellExtension>
 
-bin\testAssemblyAttributes.exe alby.assemblyAttributes.exe "..\alby.adventureworks2008\bin\alby.adventureworks2008.codegen.dll"
+bin\alby.testAssemblyAttributes.exe alby.assemblyAttributes.exe "..\alby.adventureworks2008\bin\alby.adventureworks2008.codegen.dll"
 
 
 # what was this developed and tested on?
