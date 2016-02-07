@@ -44,3 +44,11 @@ bin\alby.testAssemblyAttributes.exe alby.assemblyAttributes.exe "..\alby.adventu
 visual studio 2013
 
 window 8
+
+# alby's c++ wide character best bet:
+
+- use windows xxxW functions wherever possible 
+- use std::wstring internally
+- use std::string  externally, ie cout, file io
+- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
+

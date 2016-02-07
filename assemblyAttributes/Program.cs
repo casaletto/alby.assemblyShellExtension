@@ -7,7 +7,7 @@ using System.Reflection ;
 using System.IO ;
 using sd = System.Diagnostics ;
 
-namespace alby.assemblyAttributes
+namespace alby.assemblyAttributes   
 {
 	public class Program
 	{

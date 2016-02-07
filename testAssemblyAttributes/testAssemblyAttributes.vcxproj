@@ -134,7 +134,8 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <UseFullPaths>true</UseFullPaths>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,6 +160,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\assemblyAttributes\assemblyAttributes.csproj">
+      <Project>{9db6c2d8-40d9-4456-abcd-61500541ad71}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\libAssemblyAttributes\libAssemblyAttributes.vcxproj">
       <Project>{5448eb09-4212-43a7-85df-8b35d07685aa}</Project>
     </ProjectReference>

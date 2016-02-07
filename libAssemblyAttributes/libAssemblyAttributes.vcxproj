@@ -129,7 +129,8 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SuppressStartupBanner>false</SuppressStartupBanner>
       <UseFullPaths>true</UseFullPaths>
-      <DebugInformationFormat>None</DebugInformationFormat>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

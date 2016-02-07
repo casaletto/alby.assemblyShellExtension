@@ -1,0 +1,15 @@
+HKCR
+{
+	NoRemove CLSID
+	{
+		ForceRemove {382E162B-4E2A-4F49-B120-64070B2F6084} = s 'assemblyShelllPropertyPage Class'
+		{
+			InprocServer32 = s '%MODULE%'
+			{
+				val ThreadingModel = s 'Apartment'
+			}
+			TypeLib = s '{862D6C4F-9E24-43A6-8B25-34F43F68ABD0}'
+			Version = s '1.0'
+		}
+	}
+}

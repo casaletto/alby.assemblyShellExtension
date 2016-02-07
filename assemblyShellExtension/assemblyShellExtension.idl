@@ -1,0 +1,32 @@
+// assemblyShellExtension.idl : IDL source for assemblyShellExtension
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (assemblyShellExtension.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl"; 
+
+[
+	object,
+	uuid(5699F9C4-8A04-45EF-8B24-F1E6A636E194),
+	pointer_default(unique)
+]
+interface IassemblyShelllPropertyPage : IUnknown{
+};
+[
+	uuid(862D6C4F-9E24-43A6-8B25-34F43F68ABD0),
+	version(1.0),
+]
+library assemblyShellExtensionLib
+{
+	importlib("stdole2.tlb");
+	[
+		uuid(382E162B-4E2A-4F49-B120-64070B2F6084)		
+	]
+	coclass assemblyShelllPropertyPage
+	{
+		[default] interface IassemblyShelllPropertyPage;
+	};
+};
+
