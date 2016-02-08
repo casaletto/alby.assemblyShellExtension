@@ -12,23 +12,38 @@ visual studio 2013:
 msbuild alby.assemblyShellExtension.sln /t:Clean,Rebuild /p:Configuration=Release /p:Platform=x64
 
 
-
-# how do i install and run it?
+# how do i install  it?
 
 TO DO
+
+after building, copy the following binary to somewhere in your %PATH%
+
+regsrv32 .....
+
+msbuild alby.assemblyShellExtension.sln /t:Register
 
 # how do i run it?
 
 TO DO
 
+right-click example png here
+
 # how do i uninstall it?
 
 TO DO
 
+regsrv32 /u .....
+
+build.proj TO DO 
+
+msbuild alby.assemblyShellExtension.sln /t:Unregister 
+
 # what are the key artifacts?
 
 bin\alby.assemblyAttributes.exe
+
 bin\alby.assemblyAttributes.exe.config
+
 bin\the atl dll TO DO
 
 

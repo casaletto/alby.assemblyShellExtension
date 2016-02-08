@@ -50,12 +50,12 @@ namespace alby
 						stream( head, tail ... ) ;
 					}
 
-					void stdoutput()
+					void stdOutput()
 					{
 						std::cout << this->s() << std::endl ;
 					}
 
-					void stderror()
+					void stdError()
 					{
 						std::cerr << this->s() << std::endl;
 					}

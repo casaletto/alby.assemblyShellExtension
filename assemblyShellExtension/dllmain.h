@@ -1,4 +1,3 @@
-// dllmain.h : Declaration of module class.
 
 class CassemblyShellExtensionModule : public ATL::CAtlDllModuleT< CassemblyShellExtensionModule >
 {

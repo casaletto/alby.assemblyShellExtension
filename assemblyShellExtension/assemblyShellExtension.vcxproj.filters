@@ -25,10 +25,16 @@
     <ClCompile Include="assemblyShellExtension.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="assemblyShelllPropertyPage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="assemblyShellExtension_i.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="assemblyShelllPropertyPage.cpp">
+    <ClCompile Include="xdlldata.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,10 +48,16 @@
     <ClInclude Include="Resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dllmain.h">
+    <ClInclude Include="assemblyShelllPropertyPage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="assemblyShelllPropertyPage.h">
+    <ClInclude Include="assemblyShellExtension_i.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="xdlldata.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="dllmain.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -63,6 +75,9 @@
     </None>
     <None Include="assemblyShelllPropertyPage.rgs">
       <Filter>Resource Files</Filter>
+    </None>
+    <None Include="assemblyShellExtensionps.def">
+      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

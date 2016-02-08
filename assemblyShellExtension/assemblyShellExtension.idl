@@ -13,6 +13,7 @@ import "ocidl.idl";
 	pointer_default(unique)
 ]
 interface IassemblyShelllPropertyPage : IUnknown{
+	[] HRESULT HelloWorld(BSTR aString, [out, retval] BSTR* returnedBStr);
 };
 [
 	uuid(862D6C4F-9E24-43A6-8B25-34F43F68ABD0),

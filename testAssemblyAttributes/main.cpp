@@ -13,17 +13,6 @@ namespace lib = alby::assemblyAttributes::lib ;
 void testCom() ;
 void testGetAssemblyAttributes( int argc, wchar_t* argv[] ) ;
 
-/*
-
-alby's c++ wide character best bet:
-
-- use windows xxxW functions whereever possible 
-- use std::wstring internally
-- use std::string  externally, ie cout, file io
-- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
-
-*/
-
 // wmain: program entry point
 // must be a global function
 // cant be in a namespace
@@ -42,27 +31,26 @@ int wmain( int argc, wchar_t* argv[] )
 	try
 	{
 		testCom();
-		testGetAssemblyAttributes( argc, argv ) ;
-
+		//testGetAssemblyAttributes( argc, argv ) ;
 		rc = 0 ;  
 	}
 	catch (const lib::exception& ex)
 	{
 		err = lib::sprintf(L"EXCEPTION\n", ex.what());
 		err.debug();
-		err.stderror();
+		err.stdError();
 	}
 	catch( const std::exception& ex ) 
 	{
 		err = lib::sprintf(L"EXCEPTION\n", ex.what());
 		err.debug();
-		err.stderror();
+		err.stdError();
 	}
 	catch( ... ) 
 	{
 		err = L"EXCEPTION\n..." ;
 		err.debug();
-		err.stderror();
+		err.stdError();
 	}
 
 	msg = lib::sprintf(L"testAssemblyAttributes [finish] [", rc, L"]");
@@ -71,49 +59,39 @@ int wmain( int argc, wchar_t* argv[] )
 	return rc ;
 }
 
+//ALBY TO DO doco run as admin 
+// regsvr32 /s    alby.assemblyShellExtension.dll
+// regsvr32 /u /s alby.assemblyShellExtension.dll
+//https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
+
 void testCom()
 {
-	// https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
-
-	#define MY_DEFINE_GUID(name, l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8) const GUID name = { l, w1, w2, { b1, b2,  b3,  b4,  b5,  b6,  b7,  b8 } }
-	MY_DEFINE_GUID(CLSID_ALBY, 0xFF000017, 0x0000, 0x0000, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x46);
-
 	try
 	{
 		lib::comEnvironment com ;  
 
-		//ALBY
-		auto libid = __uuidof( assemblyShellExtensionLib::__assemblyShellExtensionLib ) ;//ALBY how to 
-		auto msg = lib::sprintf( libid.Data1, libid.Data2, libid.Data3, libid.Data4 ) ;
-		msg.stdoutput() ;
+		lib::sprintf msg = lib::helper::getDateTime();
+		msg.debug();
 
-		CComPtr<IUnknown> palby;
-		auto hr = palby.CoCreateInstance( __uuidof( assemblyShellExtensionLib::assemblyShelllPropertyPage  ) ) ;
+		assemblyShellExtensionLib::IassemblyShelllPropertyPagePtr p;
+
+		auto hr = p.CreateInstance( __uuidof( assemblyShellExtensionLib::assemblyShelllPropertyPage ) ) ;
 		if ( FAILED(hr) ) throw _com_error( hr ) ;
 
-		CComPtr<IUnknown> punk ;
-		hr = punk.CoCreateInstance( CLSID_StaticDib ) ; //CLSID_ALBY ) ; //CLSID_StaticDib );
-		if ( FAILED(hr) ) throw _com_error( hr ) ;
+		_bstr_t p1 = L"BARNEY" ;
+		auto result = p->HelloWorld( p1 ) ;
 
-		if (punk.p == nullptr)
-			throw lib::exception(L"null ptr punk", __FILE__, __LINE__ );
+		msg = lib::sprintf( result.GetBSTR() ) ; 
+		msg.stdOutput();
 
-		msg = lib::sprintf( punk.p ) ;
-		msg.stdoutput() ;
-
+		/*
 		CComQIPtr<IDataObject> pdata = punk;
 		if ( pdata.p == nullptr ) 
 			throw lib::exception( L"null ptr pdata", __FILE__, __LINE__ ) ; 
 
 		msg = lib::sprintf( pdata.p ) ;
 		msg.stdoutput();
-
-		CComQIPtr<IAccessible> pacc = pdata ;
-		if ( pacc.p == nullptr )
-			throw lib::exception( L"null ptr pacc", __FILE__, __LINE__);
-
-		msg = lib::sprintf( pacc.p ) ;
-		msg.stdoutput();
+		*/
 	}
 	catch( const _com_error& ex )
 	{
@@ -157,7 +135,7 @@ void testGetAssemblyAttributes( int argc, wchar_t* argv[] )
 	for (auto k : dic)
 	{
 		auto str = lib::sprintf(L"#", k.first, L"# = [", k.second, L"]");
-		str.stdoutput();
+		str.stdOutput();
 	}
 }
 

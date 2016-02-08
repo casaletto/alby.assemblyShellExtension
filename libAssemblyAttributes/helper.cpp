@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "stringHelper.h"
 #include "exception.h" 
+#include "sprintf.h"
 #include "helper.h"
 
-using namespace alby::assemblyAttributes::lib ;
+using namespace alby::assemblyAttributes::lib ; 
 
 helper::helper()
 {
@@ -13,7 +14,8 @@ helper::~helper()
 {
 }
 
-std::vector<std::wstring> helper::argvToVector( int argc, wchar_t* argv[] )
+std::vector<std::wstring> 
+helper::argvToVector( int argc, wchar_t* argv[] )
 {
 	std::vector<std::wstring> args ;
 	
@@ -23,7 +25,8 @@ std::vector<std::wstring> helper::argvToVector( int argc, wchar_t* argv[] )
 	return args ;
 }
 
-void helper::getArguments( std::vector<std::wstring>& args, std::wstring& inspector, std::wstring& inspectee )
+void 
+helper::getArguments( std::vector<std::wstring>& args, std::wstring& inspector, std::wstring& inspectee )
 {
 	inspector = std::wstring() ;
 	inspectee = std::wstring() ;
@@ -35,7 +38,8 @@ void helper::getArguments( std::vector<std::wstring>& args, std::wstring& inspec
 		 inspectee = args[2] ;
 }
 
-std::map<std::wstring, std::wstring> helper::toMap( const std::wstring str, wchar_t majorDelim, wchar_t minorDelim )
+std::map<std::wstring, std::wstring> 
+helper::toMap( const std::wstring str, wchar_t majorDelim, wchar_t minorDelim )
 {
 	std::map<std::wstring, std::wstring> dic ;
 
@@ -61,5 +65,19 @@ std::map<std::wstring, std::wstring> helper::toMap( const std::wstring str, wcha
 	}
 
 	return dic ;
+}
+
+std::wstring 
+helper::getDateTime()
+{
+	auto t  = std::time( nullptr ) ;
+	auto tm = std::localtime( &t ) ;
+
+	std::stringstream ss ;
+	ss << std::put_time( tm, "%Y.%m.%d %H.%M.%S" ) ; 
+
+	lib::sprintf msg( ss.str().c_str() ) ;
+
+	return msg.ws() ;
 }
 
