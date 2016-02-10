@@ -25,13 +25,15 @@ HRESULT assemblyShelllPropertyPage::FinalConstruct()
 	return S_OK;
 }
 
-void assemblyShelllPropertyPage::FinalRelease()
+void 
+assemblyShelllPropertyPage::FinalRelease()
 {
 	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [final release]");
 	msg.debug();
 }
 
-STDMETHODIMP assemblyShelllPropertyPage::HelloWorld( BSTR aString, BSTR* returnedBStr)
+STDMETHODIMP 
+assemblyShelllPropertyPage::HelloWorld( BSTR aString, BSTR* returnedBStr)
 {
 	auto msg = lib::sprintf( L"assemblyShelllPropertyPage [HelloWorld]" ) ;
 	msg.debug();
@@ -45,3 +47,46 @@ STDMETHODIMP assemblyShelllPropertyPage::HelloWorld( BSTR aString, BSTR* returne
 
 	return S_OK;
 }
+
+STDMETHODIMP 
+assemblyShelllPropertyPage::Initialize
+(
+	PCIDLIST_ABSOLUTE pidlFolder,
+	IDataObject *pdtobj,
+	HKEY hkeyProgID
+)
+{
+	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [Initialize]");
+	msg.debug();
+
+	return E_NOTIMPL ;
+}
+
+STDMETHODIMP
+assemblyShelllPropertyPage::AddPages
+(
+	LPFNSVADDPROPSHEETPAGE pfnAddPage,
+	LPARAM lParam
+)
+{
+	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [AddPages]");
+	msg.debug();
+
+	return E_NOTIMPL;
+}
+
+STDMETHODIMP
+assemblyShelllPropertyPage::ReplacePage
+(
+	EXPPS uPageID,
+	LPFNSVADDPROPSHEETPAGE pfnReplaceWith,
+	LPARAM lParam
+) 
+{
+	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [ReplacePage]");
+	msg.debug();
+
+	return E_NOTIMPL;
+}
+
+

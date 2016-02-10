@@ -19,6 +19,7 @@
 #include <fcntl.h>
 
 #include <windows.h>
+#include <shlobj.h>
 #include <comdef.h>
 #include <atlbase.h>
 #include <atlconv.h>

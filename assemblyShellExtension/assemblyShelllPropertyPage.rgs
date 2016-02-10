@@ -12,4 +12,51 @@ HKCR
 			Version = s '1.0'
 		}
 	}
+
+	NoRemove dllfile
+	{
+		NoRemove shellex
+		{
+			NoRemove PropertySheetHandlers
+			{
+				ForceRemove alby.assemblyShellExtension = s '{382E162B-4E2A-4F49-B120-64070B2F6084}'
+			}
+		}
+	}
+
+	NoRemove exefile
+	{
+		NoRemove shellex
+		{
+			NoRemove PropertySheetHandlers
+			{
+				ForceRemove alby.assemblyShellExtension = s '{382E162B-4E2A-4F49-B120-64070B2F6084}'
+			}
+		}
+	}
+
 }
+
+HKLM
+{
+	NoRemove SOFTWARE
+	{
+		NoRemove Microsoft
+		{
+			NoRemove Windows
+			{
+				NoRemove CurrentVersion
+				{
+					NoRemove 'Shell Extensions'
+					{
+						NoRemove Approved
+						{
+							val {382E162B-4E2A-4F49-B120-64070B2F6084} = s 'alby.assemblyShellExtension'				
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

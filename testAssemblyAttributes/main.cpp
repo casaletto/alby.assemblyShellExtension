@@ -18,6 +18,10 @@ void testGetAssemblyAttributes( int argc, wchar_t* argv[] ) ;
 // cant be in a namespace
 // not even in the :: global namespace
 
+
+//ALBY TO DO: have to fire the exe from the cuurent folder of the ATL dll
+
+
 int wmain( int argc, wchar_t* argv[] ) 
 {
 	int rc = 1 ;
@@ -31,7 +35,7 @@ int wmain( int argc, wchar_t* argv[] )
 	try
 	{
 		testCom();
-		//testGetAssemblyAttributes( argc, argv ) ;
+		testGetAssemblyAttributes( argc, argv ) ;
 		rc = 0 ;  
 	}
 	catch (const lib::exception& ex)
