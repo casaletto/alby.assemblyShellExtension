@@ -2,28 +2,41 @@
 
 # what is it?
 
-a tool to let you see your .net assembly attributes in windows explorer's file properties dialog
+an extension to windows explorer to let you see .net assembly attributes in the file properties dialog
 
 
 # how do i build it?
 
-visual studio 2013:
+visual studio 2013
 
-msbuild alby.assemblyShellExtension.sln /t:Clean,Rebuild /p:Configuration=Release /p:Platform=x64
+    msbuild alby.assemblyShellExtension.sln /t:Clean,Rebuild /p:Configuration=Release /p:Platform=x64
 
 
 # what are the key artifacts?
 
-bin\alby.assemblyAttributes.exe
+    bin\alby.assemblyShellExtension.dll 
+    (C++ ATL COM shell extension dll, this is the money shot)
 
-bin\alby.assemblyAttributes.exe.config
 
-bin\alby.assemblyShellExtension.dll (the money shot)
+    bin\alby.assemblyAttributes.exe 
+
+(.net dll that reflects other .net assemblies, provides attribute information to C++ dll above)
+
+    bin\alby.assemblyAttributes.exe.config
+
+(required config file for above)
 
 
 # any other artifacts?
 
-bin\alby.testAssemblyAttributes.exe (a test program)
+- bin\alby.testAssemblyAttributes.exe (a C++ test program)
+
+
+# what's the bitness?
+
+- all binaries produced are 64 bit only
+
+(i don't do 32 bit, it's 2016 FFS)
 
 
 # how do i install it?
@@ -32,48 +45,56 @@ TO DO
 put the following files 
 
 bin\alby.assemblyAttributes.exe
-
 bin\alby.assemblyAttributes.exe.config
-
 bin\alby.assemblyShellExtension.dll 
 
-in the same folder. 
+into the same folder. 
+
 then run
 
-regsvr32 alby.assemblyShellExtension.dll
+run as admin
 
+    regsvr32 alby.assemblyShellExtension.dll
+
+//ALBY TO DO test with a unc .net file
 
 # how do i uninstall it?
 
-regsvr32 /u alby.assemblyShellExtension.dll
+run as admin
+
+    regsvr32 /u alby.assemblyShellExtension.dll
 
 
 # how do i run it?
 
-TO DO right-click on a .net .exe or .dll in windows explorer, and select properties.
+you don't run it.
 
-
+right click on a .net .exe or .dll in windows explorer, click properties, click on the new tab titled "TO DO xxx assembly attributes"
 
 
 # what's an example of running the test program?
 
-bin\alby.testAssemblyAttributes.exe bin\alby.assemblyAttributes.exe c:\Windows\Microsoft.NET\Framework\v4.0.30319\Microsoft.Activities.Build.dll
-
-bin\alby.testAssemblyAttributes.exe "bin\alby.assemblyAttributes.exe" "C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
+    bin\alby.testAssemblyAttributes.exe "bin\alby.assemblyAttributes.exe" "C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
 
 
 # what was this developed and tested on?
 
-visual studio 2013
+- visual studio 2013
+- window 8
+- not tested on any other windows operating system, so *caveat emptor*
 
-window 8
+# what's the licence ?
+
+- [the MIT licence](https://opensource.org/licenses/MIT)
 
 
-# alby's c++ wide character best bet
+# alby's best bet on wide character set usage in C++ on windows
 
-- use windows xxxW functions wherever possible 
-- use std::wstring internally
-- use std::string  externally, ie cout, file io
-- repeat: never ever send utf16 wstring's to io, only ever send utf8 string's
+- always use windows win32/win64 unicode xxxW functions wherever possible, avoid xxxA ansi functions 
+- always use std::wstring internally
+- always use std::string externally, ie when piping to std::cout, file io, pipe io, etc
+- always pipe to std::cout
+- never ever pipe to std::wcout
+- repeat: never ever pipe unicode/utf16 std::wstrings to any io, convert to utf8 std::strings and pipe to std::cout
 
 

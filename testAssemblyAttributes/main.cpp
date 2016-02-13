@@ -4,6 +4,7 @@
 #include "..\libAssemblyAttributes\sprintf.h"
 #include "..\libAssemblyAttributes\process.h"
 #include "..\libAssemblyAttributes\comEnvironment.h" 
+#include "..\libAssemblyAttributes\globalAlloc.h" 
 #include "..\libAssemblyAttributes\helper.h" 
 
 #import "..\bin\assemblyShellExtension.tlb" 
@@ -36,9 +37,10 @@ int wmain( int argc, wchar_t* argv[] )
 	{
 		testCom();
 		testGetAssemblyAttributes( argc, argv ) ;
+		
 		rc = 0 ;  
 	}
-	catch (const lib::exception& ex)
+	catch ( const lib::exception& ex )
 	{
 		err = lib::sprintf(L"EXCEPTION\n", ex.what());
 		err.debug();
@@ -63,13 +65,13 @@ int wmain( int argc, wchar_t* argv[] )
 	return rc ;
 }
 
-//ALBY TO DO doco run as admin 
-// regsvr32 /s    alby.assemblyShellExtension.dll
-// regsvr32 /u /s alby.assemblyShellExtension.dll
-//https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
-
 void testCom()
 {
+	// run as admin:
+	// regsvr32 /s    alby.assemblyShellExtension.dll
+	// regsvr32 /u /s alby.assemblyShellExtension.dll
+	//ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
+
 	try
 	{
 		lib::comEnvironment com ;  

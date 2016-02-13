@@ -35,3 +35,6 @@
 #include <codecvt>
 #include <fstream>
 #include <map>
+
+#define EXTENTED_MAX_PATH 32767
+
