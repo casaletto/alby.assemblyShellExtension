@@ -72,6 +72,8 @@ you don't run it.
 right click on a .net .exe or .dll in windows explorer, click properties, click on the new tab titled "TO DO xxx assembly attributes"
 
 
+TO DO picture
+
 # what's an example of running the test program?
 
     bin\alby.testAssemblyAttributes.exe "bin\alby.assemblyAttributes.exe" "C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
@@ -90,11 +92,11 @@ right click on a .net .exe or .dll in windows explorer, click properties, click 
 
 # alby's best bet on wide character set usage in C++ on windows
 
-- always use windows win32/win64 unicode xxxW functions wherever possible, avoid xxxA ansi functions 
+- always use windows win32/win64 unicode xxxW functions wherever possible, ie avoid xxxA ansi functions 
 - always use std::wstring internally
 - always use std::string externally, ie when piping to std::cout, file io, pipe io, etc
 - always pipe to std::cout
 - never ever pipe to std::wcout
-- repeat: never ever pipe unicode/utf16 std::wstrings to any io, convert to utf8 std::strings and pipe to std::cout
+- repeat: never ever pipe unicode/utf16 std::wstrings to any io. instead, convert to utf8 std::strings and pipe to std::cout
 
 
