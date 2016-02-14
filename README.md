@@ -41,22 +41,20 @@ visual studio 2013
 
 # how do i install it?
 
-TO DO
+TO DO check path stuff
+
 put the following files 
 
-bin\alby.assemblyAttributes.exe
-bin\alby.assemblyAttributes.exe.config
-bin\alby.assemblyShellExtension.dll 
+    bin\alby.assemblyAttributes.exe
+    bin\alby.assemblyAttributes.exe.config
+    bin\alby.assemblyShellExtension.dll 
 
-into the same folder. 
+into the same folder 
 
-then run
-
-run as admin
+then run as admin
 
     regsvr32 alby.assemblyShellExtension.dll
 
-//ALBY TO DO test with a unc .net file
 
 # how do i uninstall it?
 
