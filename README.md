@@ -14,17 +14,17 @@ visual studio 2013
 
 # what are the key artifacts?
 
-C++ ATL COM shell extension dll, this is the p;ug in to windows explorer
+a C++ ATL COM windows explorer shell extension dll:
 
     bin\alby.assemblyShellExtension.dll 
 
 	
-.net dll that reflects other .net assemblies, provides attribute information to C++ dll above
+a  C#.net dll that reflects other .net assemblies, provides attribute information to the dll above:
 
     bin\alby.assemblyAttributes.exe 
 
 	
-the required configuration file for the above
+and the required configuration file for the above C# dll:
 
     bin\alby.assemblyAttributes.exe.config
 
