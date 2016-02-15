@@ -65,16 +65,14 @@ run as admin
 
 # how do i run it?
 
-you don't run it.
+you don't run it, it's a plug in to explorer.
 
-right click on a .net .exe or .dll in windows explorer
-
-click properties
-
-click on the new tab titled "TO DO xxx assembly attributes"
-
+- right click on a .net .exe or .dll in windows explorer
+- click properties
+- click on the new tab titled "TO DO xxx assembly attributes"
 
 TO DO picture
+
 
 # what's an example of running the test program?
 
