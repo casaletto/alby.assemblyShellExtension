@@ -33,11 +33,10 @@ visual studio 2013
 
     bin\alby.testAssemblyAttributes.exe 
 
+	
 # what's the bitness?
 
 - all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS.*
-
---*I don't do 32 bit, it's 2016 FFS*
 
 
 # how do i install it?
@@ -68,7 +67,11 @@ run as admin
 
 you don't run it.
 
-right click on a .net .exe or .dll in windows explorer, click properties, click on the new tab titled "TO DO xxx assembly attributes"
+right click on a .net .exe or .dll in windows explorer
+
+click properties
+
+click on the new tab titled "TO DO xxx assembly attributes"
 
 
 TO DO picture
