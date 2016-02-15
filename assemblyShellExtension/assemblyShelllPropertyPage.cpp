@@ -77,11 +77,46 @@ assemblyShelllPropertyPage::Initialize
 		if ( fileCount == 0 ) 
 			 throw lib::exception( L"DragQueryFileW(): no files.", __FILE__, __LINE__ ) ;
 
-		auto firstFile = lib::globalAlloc( (EXTENTED_MAX_PATH + 2) * sizeof(WCHAR) ) ;
+		auto firstFile = lib::globalAlloc( (lib::helper::EXTENTED_MAX_PATH + 2) * sizeof(WCHAR) ) ;
 		auto sz = firstFile.getPointer<LPWSTR>();
 
-		::DragQueryFileW( hdrop.getPointer<HDROP>(), 0, sz, EXTENTED_MAX_PATH ) ;
+		// get file name from shell
+		::DragQueryFileW( hdrop.getPointer<HDROP>(), 0, sz, lib::helper::EXTENTED_MAX_PATH ) ;
 		filename = sz ;
+
+		// file name suffix must in [ .dll .exe ]
+		auto ok = lib::stringHelper::endsWith( filename, L".dll", false ) ||
+				  lib::stringHelper::endsWith( filename, L".exe", false ) ;
+
+		if ( ! ok ) return HR_ABORT ;
+
+		// get current folder to find exe path
+		auto folder = lib::helper::getCurrentModuleDirectory() ;
+		auto exe    = lib::sprintf( folder, L"\\", lib::helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE ) ; 
+
+		// call the child .net process
+		lib::process pr ;
+		auto rc = pr.exec( exe.ws(), filename ) ;
+
+		auto theStdout = lib::stringHelper::trim( pr.getStdout() ) ;
+		auto theStderr = lib::stringHelper::trim( pr.getStderr() ) ;
+
+		msg = lib::sprintf( L"rc [", rc, L"]" ) ;
+		msg.debug();
+
+		msg = lib::sprintf( L"stdout [\n", theStdout, L"]");
+		msg.debug();
+
+		msg = lib::sprintf( L"stderr [\n", theStderr, L"]");
+		msg.debug();
+
+		if ( theStderr.size() > 0 ) return HR_ABORT ;
+		if ( rc !=  0             ) return HR_ABORT ;
+
+		//ALBY here
+
+
+
 	}
 	catch ( const lib::exception& ex )
 	{
@@ -102,12 +137,7 @@ assemblyShelllPropertyPage::Initialize
 		return HR_ABORT ;
 	}
 
-	//ALBY dll exe chack
-
-	msg = lib::sprintf( L"[", filename, L"]" ) ;
-	msg.debug();
-
-	return E_NOTIMPL ; //ALBY change to S_OK
+	return E_NOTIMPL ; //ALBY TO DO at the end:change to S_OK
 }
 
 STDMETHODIMP

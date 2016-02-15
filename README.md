@@ -30,13 +30,14 @@ visual studio 2013
 # any other artifacts?
 
 - a C++ test program
+
     bin\alby.testAssemblyAttributes.exe 
 
 # what's the bitness?
 
-- all binaries produced are 64 bit only
+- all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS.*
 
-*I don't do 32 bit, it's 2016 FFS*
+--*I don't do 32 bit, it's 2016 FFS*
 
 
 # how do i install it?

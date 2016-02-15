@@ -9,6 +9,8 @@ namespace alby
 			class helper
 			{
 				public:
+					static const std::wstring CSHARP_ASSEMBLY_ATTRIBUTES_EXE ; 
+					static const int EXTENTED_MAX_PATH = 32767 ;
 
 					helper();
 					virtual ~helper();
@@ -24,6 +26,9 @@ namespace alby
 
 					static std::wstring 
 					getDateTime() ;
+
+					static std::wstring 
+					getCurrentModuleDirectory() ;
 			} ;
 		
 		} // ns lib

@@ -14,6 +14,8 @@ stringHelper::~stringHelper()
 std::wstring 
 stringHelper::s2ws(const std::string& str)
 {
+//ALBY change to weindows functions
+
 	typedef std::codecvt_utf8<wchar_t> convert_typeX;
 
 	std::wstring_convert<convert_typeX, wchar_t> converterX;
@@ -24,6 +26,8 @@ stringHelper::s2ws(const std::string& str)
 std::string 
 stringHelper::ws2s(const std::wstring& wstr)
 {
+//ALBY change to weindows functions
+
 	typedef std::codecvt_utf8<wchar_t> convert_typeX;
 
 	std::wstring_convert<convert_typeX, wchar_t> converterX;
@@ -85,11 +89,11 @@ stringHelper::endsWith( const std::wstring& str, const std::wstring& suffix, boo
 		suffix2	= stringHelper::toUpper( suffix2 ) ;
 	}
 
-	auto pos = str.rfind( suffix2 ) ;
+	auto pos2 = str2.rfind( suffix2 ) ;
 
-	if ( pos == std::wstring::npos ) return false ;
+	if ( pos2 == std::wstring::npos ) return false ;
 
-	return str2.size() == suffix2.size() + pos ;
+	return str2.size() == suffix2.size() + pos2 ;
 }
 
 bool
@@ -108,11 +112,11 @@ stringHelper::startsWith( const std::wstring& str, const std::wstring& prefix, b
 		prefix2	= stringHelper::toUpper( prefix2 ) ;
 	}
 
-	auto pos = str.find( prefix2 ) ;
+	auto pos2 = str2.find( prefix2 ) ;
 
-	if ( pos == std::wstring::npos ) return false ;
+	if ( pos2 == std::wstring::npos ) return false ;
 
-	return pos == 0 ;
+	return pos2 == 0 ;
 }
 
 std::wstring 

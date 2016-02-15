@@ -98,7 +98,8 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 	::ZeroMemory( &pi, sizeof(pi) ) ;
 
 	si.cb = sizeof(si) ;
-	si.dwFlags |= STARTF_USESTDHANDLES ; 
+	si.dwFlags |= STARTF_USESTDHANDLES | STARTF_USESHOWWINDOW ;
+	si.wShowWindow = SW_HIDE ; 
 
 	si.hStdOutput = hChildStdoutWrite;
 	si.hStdError = hChildStderrWrite ; 

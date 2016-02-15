@@ -19,10 +19,6 @@ void testGetAssemblyAttributes( int argc, wchar_t* argv[] ) ;
 // cant be in a namespace
 // not even in the :: global namespace
 
-
-//ALBY TO DO: have to fire the exe from the cuurent folder of the ATL dll
-
-
 int wmain( int argc, wchar_t* argv[] ) 
 {
 	int rc = 1 ;
@@ -67,7 +63,7 @@ int wmain( int argc, wchar_t* argv[] )
 
 void testCom()
 {
-	// run as admin:
+	//ALBY  run as admin:
 	// regsvr32 /s    alby.assemblyShellExtension.dll
 	// regsvr32 /u /s alby.assemblyShellExtension.dll
 	//ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx

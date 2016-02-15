@@ -2,6 +2,7 @@
 #include "stringHelper.h"
 #include "exception.h" 
 #include "sprintf.h"
+#include "globalAlloc.h"
 #include "helper.h"
 
 using namespace alby::assemblyAttributes::lib ; 
@@ -13,6 +14,9 @@ helper::helper()
 helper::~helper()
 {
 }
+
+const std::wstring helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE = L"alby.assemblyAttributes.exe" ;
+
 
 std::vector<std::wstring> 
 helper::argvToVector( int argc, wchar_t* argv[] )
@@ -81,3 +85,34 @@ helper::getDateTime()
 	return msg.ws() ;
 }
 
+
+std::wstring
+helper::getCurrentModuleDirectory()
+{
+	HMODULE hmodule = NULL ;
+
+	::GetModuleHandleExW(
+		GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT, 
+		(LPCWSTR) getCurrentModuleDirectory, 
+		&hmodule ) ;
+
+	if ( hmodule == NULL )
+		 throw lib::exception( L"GetModuleHandleEx() failed.", __FILE__, __LINE__ ) ;
+
+	auto sz = lib::globalAlloc( (helper::EXTENTED_MAX_PATH + 2) * sizeof(WCHAR));
+	auto p = sz.getPointer<LPWSTR>();
+
+	auto rc = ::GetModuleFileNameW( hmodule, p, helper::EXTENTED_MAX_PATH ) ;
+	if ( rc == 0 )
+		 throw lib::exception( L"GetModuleFileName() failed.", __FILE__, __LINE__ ) ;
+
+	std::wstring result = p ;
+
+	auto pos = result.rfind( L"\\" ) ;
+	if ( pos == std::wstring::npos )
+		 throw lib::exception( L"rfind(): cant find \\", __FILE__, __LINE__);
+
+	result = result.substr( 0, pos ) ;
+
+	return result ;
+}
