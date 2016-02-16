@@ -17,9 +17,6 @@ namespace alby.assemblyAttributes
 
 			sd.Trace.WriteLine("alby.assemblyAttributes [start]");
 
-			//Console.WriteLine("STDOUT UTF8 TESTフル_ツ fruit פרי καρπός, pear αχλάδι, orange πορτοκάλι, orange オレンジ, pear 梨, watermelon אבטיח");
-			//Console.Error.WriteLine("STDERR UTF8 TEST フル_ツ fruit פרי καρπός, pear αχλάδι, orange πορτοκάλι, orange オレンジ, pear 梨, watermelon אבטיח");
-
 			try
 			{
 				var dic = new Dictionary<string, string> {} ;
@@ -44,7 +41,11 @@ namespace alby.assemblyAttributes
 					i.ConstructorArguments.Take(1).ToList().ForEach( k => value = k.Value ) ;
 
 					value = value ?? "" ;
-					dic.Add( i.AttributeType.Name.Replace( "Attribute", "" ), value.ToString() ) ;
+
+					var key = i.AttributeType.Name.Replace( "Attribute", "" ) ;
+
+					if ( ! dic.ContainsKey( key ) )
+						   dic.Add( key, value.ToString() ) ;
 				});
 
 				// dump

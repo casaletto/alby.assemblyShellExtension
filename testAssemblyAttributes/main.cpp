@@ -11,6 +11,16 @@
 
 namespace lib = alby::assemblyAttributes::lib ;
 
+//ALBY notes:
+// run as admin:
+// regsvr32 /s    alby.assemblyShellExtension.dll
+// regsvr32 /u /s alby.assemblyShellExtension.dll
+//ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
+
+//ALBY get list of modules for this process!
+//ALBY to do http[s] thing
+
+void testUtf8();
 void testCom() ;
 void testGetAssemblyAttributes( int argc, wchar_t* argv[] ) ;
 
@@ -31,6 +41,7 @@ int wmain( int argc, wchar_t* argv[] )
 
 	try
 	{
+		testUtf8() ;
 		testCom();
 		testGetAssemblyAttributes( argc, argv ) ;
 		
@@ -63,11 +74,6 @@ int wmain( int argc, wchar_t* argv[] )
 
 void testCom()
 {
-	//ALBY  run as admin:
-	// regsvr32 /s    alby.assemblyShellExtension.dll
-	// regsvr32 /u /s alby.assemblyShellExtension.dll
-	//ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
-
 	try
 	{
 		lib::comEnvironment com ;  
@@ -141,3 +147,17 @@ void testGetAssemblyAttributes( int argc, wchar_t* argv[] )
 	}
 }
 
+void testUtf8()
+{
+	auto unicodeOrig = L"[languages of teh world Владивосто́к 日本国 すし 寿司 鮨 鮨飯 대한민국 大韓民國  سلطان سليمان اول  中华人民共和国 中華人民共和國   י   ְרוּשָׁלַ        ִם     القُدس (עיר הקודש,  سلطان سليمان اول  المملكة العربية السعودية a האקדמיה ללשון העברית  Cos'è questa cosa?  español? D'où êtes-vous À bientôt Ich heiße Was möchten Sie Wohin fährt dieser Bus मैं अच्छा हूँ, धन्यवाद। और आप?  ¡Hola! ¿Cómo está usted?]" ;
+
+	std::wstring wstr1 = unicodeOrig ;
+	std::cout << wstr1.size() << std::endl ;
+
+	auto str1 = lib::stringHelper::ws2s( wstr1 ) ;
+	std::cout << str1.size() << std::endl;
+	std::cout << str1 << std::endl ;
+
+	auto wstr2 = lib::stringHelper::s2ws( str1 ) ;
+	std::cout << wstr2.size() << std::endl ;
+}

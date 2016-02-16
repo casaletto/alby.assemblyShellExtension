@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "globalAlloc.h"
 #include "stringHelper.h"
 
 using namespace alby::assemblyAttributes::lib ;
@@ -11,28 +12,46 @@ stringHelper::~stringHelper()
 {
 }
 
-std::wstring 
-stringHelper::s2ws(const std::string& str)
+std::wstring
+stringHelper::s2ws( const std::string& str )
 {
-//ALBY change to weindows functions
-
+	/*
 	typedef std::codecvt_utf8<wchar_t> convert_typeX;
-
 	std::wstring_convert<convert_typeX, wchar_t> converterX;
-
 	return converterX.from_bytes(str);
+	*/
+
+	if ( str.empty() ) return std::wstring() ;
+
+	auto sizeChars = ::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), str.size(), NULL, 0 ) ;
+
+	auto memory = lib::globalAlloc( (sizeChars+2) * sizeof(WCHAR) ) ;
+	auto p      = memory.getPointer<WCHAR*>() ;
+
+	::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), str.size(), p, sizeChars ) ;
+
+	return std::wstring( p ) ;
 }
 
-std::string 
-stringHelper::ws2s(const std::wstring& wstr)
+std::string
+stringHelper::ws2s( const std::wstring& wstr )
 {
-//ALBY change to weindows functions
-
+	/*
 	typedef std::codecvt_utf8<wchar_t> convert_typeX;
-
 	std::wstring_convert<convert_typeX, wchar_t> converterX;
-
 	return converterX.to_bytes(wstr);
+	*/
+
+	if ( wstr.empty() ) return std::string() ;
+
+	auto sizeChars = ::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), wstr.size(), NULL, 0, NULL, NULL ) ;
+
+	auto memory = lib::globalAlloc( sizeChars + 2 ) ;
+	auto p      = memory.getPointer<char*>() ;
+
+	::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), wstr.size(), p, sizeChars, NULL, NULL ) ;
+
+	return std::string( p ) ;
 }
 
 const std::wstring stringHelper::__delimiters = L" \f\n\r\t\v";
@@ -40,7 +59,7 @@ const std::wstring stringHelper::__delimiters = L" \f\n\r\t\v";
 std::wstring 
 stringHelper::ltrim( const std::wstring& wstr )
 {
-	if ( wstr.size() == 0 ) return wstr ;
+	if ( wstr.empty() ) return wstr ;
 
 	return wstr.substr( wstr.find_first_not_of( __delimiters ) ) ;
 }
@@ -48,7 +67,7 @@ stringHelper::ltrim( const std::wstring& wstr )
 std::wstring 
 stringHelper::rtrim( const std::wstring& wstr )
 {
-	if ( wstr.size() == 0 ) return wstr ;
+	if ( wstr.empty() ) return wstr ;
 
 	return wstr.substr( 0, wstr.find_last_not_of( __delimiters ) + 1 ) ;
 }
@@ -76,8 +95,8 @@ stringHelper::split( const std::wstring& wstr, wchar_t delimiter )
 bool 
 stringHelper::endsWith( const std::wstring& str, const std::wstring& suffix, bool caseSensitive )
 {
-	if ( str.size()    == 0         ) return false ;
-	if ( suffix.size() == 0         ) return false ;
+	if ( str.empty()                ) return false ;
+	if ( suffix.empty()             ) return false ;
 	if ( suffix.size() > str.size() ) return false ;
 
 	auto str2    = std::move( str    ) ;
@@ -99,8 +118,8 @@ stringHelper::endsWith( const std::wstring& str, const std::wstring& suffix, boo
 bool
 stringHelper::startsWith( const std::wstring& str, const std::wstring& prefix, bool caseSensitive )
 {
-	if ( str.size()    == 0         ) return false ;
-	if ( prefix.size() == 0         ) return false ;
+	if ( str.empty()               ) return false ;
+	if ( prefix.empty()             ) return false ;
 	if ( prefix.size() > str.size() ) return false ;
 
 	auto str2    = std::move( str    ) ;
@@ -122,7 +141,7 @@ stringHelper::startsWith( const std::wstring& str, const std::wstring& prefix, b
 std::wstring 
 stringHelper::toUpper( const std::wstring& str )
 {
-	if ( str.size() == 0 ) return str ;
+	if ( str.empty() ) return str ;
 
 	auto result = std::move( str ) ; 
 
@@ -145,7 +164,7 @@ stringHelper::toUpper( const std::wstring& str )
 std::wstring
 stringHelper::toLower( const std::wstring& str )
 {
-	if ( str.size() == 0 ) return str ;
+	if ( str.empty() ) return str ;
 
 	auto result = std::move( str ) ; 
 

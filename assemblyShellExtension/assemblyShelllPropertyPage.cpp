@@ -113,8 +113,8 @@ assemblyShelllPropertyPage::Initialize
 		if ( theStderr.size() > 0 ) return HR_ABORT ;
 		if ( rc !=  0             ) return HR_ABORT ;
 
-		//ALBY here
-
+		//ALBY here do the dictionary thing
+//C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Stack 5\Packages\EntityFramework.6.1.1\lib\net45
 
 
 	}
