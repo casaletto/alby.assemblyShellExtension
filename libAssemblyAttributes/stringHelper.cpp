@@ -23,12 +23,12 @@ stringHelper::s2ws( const std::string& str )
 
 	if ( str.empty() ) return std::wstring() ;
 
-	auto sizeChars = ::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), str.size(), NULL, 0 ) ;
+	auto sizeChars = ::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), (int) str.size(), NULL, 0 ) ;
 
 	auto memory = lib::globalAlloc( (sizeChars+2) * sizeof(WCHAR) ) ;
 	auto p      = memory.getPointer<WCHAR*>() ;
 
-	::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), str.size(), p, sizeChars ) ;
+	::MultiByteToWideChar( CP_UTF8, 0, str.c_str(), (int) str.size(), p, sizeChars ) ;
 
 	return std::wstring( p ) ;
 }
@@ -44,12 +44,12 @@ stringHelper::ws2s( const std::wstring& wstr )
 
 	if ( wstr.empty() ) return std::string() ;
 
-	auto sizeChars = ::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), wstr.size(), NULL, 0, NULL, NULL ) ;
+	auto sizeChars = ::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), (int) wstr.size(), NULL, 0, NULL, NULL ) ;
 
 	auto memory = lib::globalAlloc( sizeChars + 2 ) ;
 	auto p      = memory.getPointer<char*>() ;
 
-	::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), wstr.size(), p, sizeChars, NULL, NULL ) ;
+	::WideCharToMultiByte( CP_UTF8, 0, wstr.c_str(), (int) wstr.size(), p, sizeChars, NULL, NULL ) ;
 
 	return std::string( p ) ;
 }

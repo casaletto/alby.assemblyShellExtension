@@ -15,6 +15,9 @@ namespace alby
 				public:
 					globalAlloc( SIZE_T bytes ) ;
 					virtual ~globalAlloc() ;
+					
+					SIZE_T getBytes() ;
+					void clear() ;
 
 					template <typename T>
 					T getHandle()
@@ -27,7 +30,6 @@ namespace alby
 					{
 						return (T) this->_handle;
 					}
-
 			};
 
 		} // ns lib

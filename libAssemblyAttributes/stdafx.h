@@ -8,6 +8,7 @@
 #include <fcntl.h>
 
 #include <windows.h>
+#include <psapi.h>
 #include <comdef.h>
 #include <atlbase.h>
 #include <atlconv.h>

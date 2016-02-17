@@ -15,8 +15,8 @@ helper::~helper()
 {
 }
 
-const std::wstring helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE = L"alby.assemblyAttributes.exe" ;
-
+const std::wstring 
+helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE = L"alby.assemblyAttributes.exe" ;
 
 std::vector<std::wstring> 
 helper::argvToVector( int argc, wchar_t* argv[] )
@@ -85,7 +85,6 @@ helper::getDateTime()
 	return msg.ws() ;
 }
 
-
 std::wstring
 helper::getCurrentModuleDirectory()
 {
@@ -116,3 +115,46 @@ helper::getCurrentModuleDirectory()
 
 	return result ;
 }
+
+std::vector<std::wstring>
+helper::getLoadedModules( HANDLE hProcess )
+{
+	std::vector<std::wstring> list ;
+
+	HMODULE rng ;
+	DWORD bytesRequired ;
+
+	auto rc = ::EnumProcessModules( hProcess, &rng, 0, &bytesRequired ) ;
+	if ( rc == 0 ) 
+		 throw lib::exception( L"EnumProcessModules() failed.", __FILE__, __LINE__ ) ;
+
+	auto mem = lib::globalAlloc( bytesRequired ) ;
+	auto pmem = mem.getPointer<HMODULE*>();
+
+	rc = ::EnumProcessModules( hProcess, pmem, (DWORD) mem.getBytes(), &bytesRequired ) ;
+	if ( rc == 0 )
+		 throw lib::exception( L"EnumProcessModules() failed.", __FILE__, __LINE__ ) ;
+
+	auto moduleCount = mem.getBytes() / sizeof( HMODULE ) ;
+
+	auto sz  = lib::globalAlloc( (helper::EXTENTED_MAX_PATH + 2) * sizeof(WCHAR) ) ;
+	auto psz = sz.getPointer<LPWSTR>() ;
+
+	for ( auto i = 0 ; i < moduleCount ; i++ )
+	{
+		sz.clear() ;
+
+		rc = ::GetModuleFileNameW( pmem[i], psz, helper::EXTENTED_MAX_PATH ) ;
+		if ( rc == 0 )
+			 throw lib::exception( L"GetModuleFileName() failed.", __FILE__, __LINE__ ) ;
+
+		list.push_back( psz ) ;
+	}
+
+	return list ;
+}
+
+
+
+
+

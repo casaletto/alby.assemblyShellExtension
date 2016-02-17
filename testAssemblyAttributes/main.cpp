@@ -17,9 +17,9 @@ namespace lib = alby::assemblyAttributes::lib ;
 // regsvr32 /u /s alby.assemblyShellExtension.dll
 //ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
 
-//ALBY get list of modules for this process!
 //ALBY to do http[s] thing
 
+void testLoadedModules() ;
 void testUtf8();
 void testCom() ;
 void testGetAssemblyAttributes( int argc, wchar_t* argv[] ) ;
@@ -41,6 +41,7 @@ int wmain( int argc, wchar_t* argv[] )
 
 	try
 	{
+		testLoadedModules() ;
 		testUtf8() ;
 		testCom();
 		testGetAssemblyAttributes( argc, argv ) ;
@@ -161,3 +162,15 @@ void testUtf8()
 	auto wstr2 = lib::stringHelper::s2ws( str1 ) ;
 	std::cout << wstr2.size() << std::endl ;
 }
+
+void testLoadedModules()
+{
+	auto hCurrentProcess = ::GetCurrentProcess() ;
+
+	auto list = lib::helper::getLoadedModules( hCurrentProcess ) ;
+
+	for ( auto i : list )
+		  lib::sprintf( i ).stdOutput() ;
+}
+
+
