@@ -14,17 +14,17 @@ visual studio 2013
 
 # what are the key artifacts?
 
-a C++ ATL COM windows explorer shell extension dll:
+a C++ ATL COM windows explorer shell extension dll
 
     bin\alby.assemblyShellExtension.dll 
 
 	
-a  C#.net dll that reflects other .net assemblies, provides attribute information to the dll above:
+a  C#.net dll that reflects other .net assemblies, provides attribute information to the dll above
 
     bin\alby.assemblyAttributes.exe 
 
 	
-and the required configuration file for the above C# dll:
+and the required configuration file for the above C# dll
 
     bin\alby.assemblyAttributes.exe.config
 
@@ -43,8 +43,6 @@ a C++ test program
 
 
 # how do i install it?
-
-TO DO check path stuff
 
 put the following files 
 

@@ -12,6 +12,8 @@ class ATL_NO_VTABLE assemblyShelllPropertyPage :
 	public IShellExtInit,
 	public IShellPropSheetExt
 {
+protected:
+	std::map<std::wstring, std::wstring> _dic ;
 
 public:
 	assemblyShelllPropertyPage() ;

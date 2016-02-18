@@ -59,6 +59,8 @@ assemblyShelllPropertyPage::Initialize
 	HKEY				hkeyProgID
 )
 {
+	this->_dic.clear() ;
+
 	const HRESULT HR_ABORT = E_INVALIDARG ;
 
 	FORMATETC formatetc = { CF_HDROP, NULL, DVASPECT_CONTENT, -1, TYMED_HGLOBAL } ;
@@ -104,18 +106,13 @@ assemblyShelllPropertyPage::Initialize
 		msg = lib::sprintf( L"rc [", rc, L"]" ) ;
 		msg.debug();
 
-		msg = lib::sprintf( L"stdout [\n", theStdout, L"]");
-		msg.debug();
+		if ( ! theStderr.empty()  )
+			  throw lib::exception( theStderr, __FILE__, __LINE__);
 
-		msg = lib::sprintf( L"stderr [\n", theStderr, L"]");
-		msg.debug();
+		if ( rc != 0 ) return HR_ABORT ;
 
-		if ( theStderr.size() > 0 ) return HR_ABORT ;
-		if ( rc !=  0             ) return HR_ABORT ;
-
-		//ALBY here do the dictionary thing
-
-
+		// transform the flat string to a dictionary
+		this->_dic = lib::helper::toMap( theStdout, L'\n', L'|' ) ;
 	}
 	catch ( const lib::exception& ex )
 	{
@@ -136,7 +133,7 @@ assemblyShelllPropertyPage::Initialize
 		return HR_ABORT ;
 	}
 
-	return E_NOTIMPL ; //ALBY TO DO at the end:change to S_OK
+	return S_OK ; 
 }
 
 STDMETHODIMP
@@ -146,10 +143,40 @@ assemblyShelllPropertyPage::AddPages
 	LPARAM lParam
 )
 {
+	const HRESULT HR_ABORT = E_NOTIMPL ;
+
 	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [AddPages]");
 	msg.debug();
 
-	return E_NOTIMPL;
+	try
+	{
+		// dump the dic
+		for (auto k : this->_dic)
+		{
+			msg = lib::sprintf(L"#", k.first, L"# = [", k.second, L"]");
+			msg.debug();
+		}
+	}
+	catch (const lib::exception& ex)
+	{
+		auto err = lib::sprintf(L"EXCEPTION\n", ex.what());
+		err.debug();
+		return HR_ABORT;
+	}
+	catch (const std::exception& ex)
+	{
+		auto err = lib::sprintf(L"EXCEPTION\n", ex.what());
+		err.debug();
+		return HR_ABORT;
+	}
+	catch (...)
+	{
+		auto err = lib::sprintf(L"EXCEPTION\n...");
+		err.debug();
+		return HR_ABORT;
+	}
+
+	return HR_ABORT ; //ALBY TO DO return S_OK
 }
 
 STDMETHODIMP
