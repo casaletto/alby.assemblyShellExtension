@@ -20,3 +20,12 @@ public class MyCustomAttribute : Attribute {
 var attributes = assembly
     .GetCustomAttributes(typeof(MyCustomAttribute), false)
     .Cast<MyCustomAttribute>();
+	
+
+GitAttributes
+
+GitCommit
+GitBranch
+GitUrl
+StashUrl
+

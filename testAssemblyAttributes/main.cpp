@@ -11,6 +11,8 @@
 
 namespace lib = alby::assemblyAttributes::lib ;
 
+//ALBY put in the  git attributes, and upload the picture to git hub 
+
 //ALBY notes:
 // run as admin:
 // regsvr32 /s    alby.assemblyShellExtension.dll
