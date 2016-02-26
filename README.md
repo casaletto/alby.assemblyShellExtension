@@ -70,9 +70,8 @@ you don't run it, it's a plug in to explorer.
 
 - right click on a .net .exe or .dll in windows explorer
 - click properties
-- click on the new tab titled "TO DO xxx assembly attributes"
-
-TO DO picture
+- click on the new tab titled "alby.NET"
+- [here's what it looks like](https://raw.githubusercontent.com/casaletto/alby.assemblyShellExtension/master/doc/theFinishedProduct.png)
 
 
 # what's an example of running the test program?
