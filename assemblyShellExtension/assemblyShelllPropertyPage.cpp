@@ -8,6 +8,7 @@
 #include "..\libAssemblyAttributes\globalLock.h" 
 #include "..\libAssemblyAttributes\stgMedium.h" 
 #include "..\libAssemblyAttributes\helper.h" 
+#include "dllmain.h"
 #include "assemblyShelllPropertyPage.h"
 
 using namespace ATL ; 
@@ -16,14 +17,14 @@ namespace lib = alby::assemblyAttributes::lib;
 
 assemblyShelllPropertyPage::assemblyShelllPropertyPage()
 {
-	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [constructor]");
+	//auto msg = lib::sprintf(L"assemblyShelllPropertyPage [constructor]");
 	//msg.debug();
 }
 
 HRESULT assemblyShelllPropertyPage::FinalConstruct()
 {
 	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [final constructor]");
-	//msg.debug();
+	msg.debug();
 
 	return S_OK;
 }
@@ -32,7 +33,7 @@ void
 assemblyShelllPropertyPage::FinalRelease()
 {
 	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [final release]");
-	//msg.debug();
+	msg.debug();
 }
 
 STDMETHODIMP 
@@ -68,7 +69,7 @@ assemblyShelllPropertyPage::Initialize
 	std::wstring filename ;
 
 	auto msg = lib::sprintf( L"assemblyShelllPropertyPage [Initialize]" ) ;
-	//msg.debug() ;
+	msg.debug() ;
 
 	try
 	{
@@ -113,6 +114,13 @@ assemblyShelllPropertyPage::Initialize
 
 		// transform the flat string to a dictionary
 		this->_dic = lib::helper::toMap( theStdout, L'\n', L'|' ) ;
+
+		// dump it
+		for ( auto k : this->_dic )
+			  lib::sprintf( L"#", k.first, L"# = [", k.second, L"]" ).debug() ;
+
+		// transform the dic to a formatted string for ui display
+		this->_uiString = lib::helper::mapToString( this->_dic ) ;
 	}
 	catch ( const lib::exception& ex )
 	{
@@ -150,33 +158,103 @@ assemblyShelllPropertyPage::AddPages
 
 	try
 	{
-		// dump the dic
-		for (auto k : this->_dic)
-		{
-			msg = lib::sprintf(L"#", k.first, L"# = [", k.second, L"]");
-			msg.debug();
-		}
+		auto mystr = new std::wstring( this->_uiString ) ; // freed by the receiver, the dlg proc
+
+		PROPSHEETPAGEW psp ;
+		::ZeroMemory( &psp, sizeof(psp) ) ;
+		
+		psp.dwSize		= sizeof( PROPSHEETPAGEW ) ;
+		psp.dwFlags		= PSP_USEREFPARENT | PSP_USETITLE | PSP_USEICONID ;
+		psp.hInstance	= _AtlBaseModule.m_hInst ; 
+		psp.pszTemplate = MAKEINTRESOURCEW( IDD_PROPPAGE_LARGE ) ;
+		psp.pszIcon		= MAKEINTRESOURCEW( IDI_ICON1 )  ;
+		psp.pszTitle	= L"alby.NET" ;
+		psp.pfnDlgProc	= (DLGPROC) MyDlgProc  ;
+		psp.lParam		= (LPARAM) mystr ; 
+		//psp.pfnCallback = PropPageCallbackProc;
+		psp.pcRefParent = (UINT*) &_AtlModule.m_nLockCnt ;
+
+		auto hPage = ::CreatePropertySheetPageW( &psp ) ;
+		if ( hPage != NULL )
+			 if ( ! pfnAddPage( hPage, lParam ) )
+			 {
+				::DestroyPropertySheetPage( hPage ) ;
+				return HR_ABORT ; 
+			 }
+
+		return S_OK ;		
 	}
-	catch (const lib::exception& ex)
+	catch ( const lib::exception& ex )
 	{
-		auto err = lib::sprintf(L"EXCEPTION\n", ex.what());
-		err.debug();
-		return HR_ABORT;
+		auto err = lib::sprintf( L"EXCEPTION\n", ex.what() ) ;
+		err.debug() ;
+		return HR_ABORT ;
 	}
-	catch (const std::exception& ex)
+	catch ( const std::exception& ex )
 	{
-		auto err = lib::sprintf(L"EXCEPTION\n", ex.what());
+		auto err = lib::sprintf( L"EXCEPTION\n", ex.what() ) ;
 		err.debug();
-		return HR_ABORT;
+		return HR_ABORT ;
 	}
 	catch (...)
 	{
-		auto err = lib::sprintf(L"EXCEPTION\n...");
-		err.debug();
-		return HR_ABORT;
+		auto err = lib::sprintf( L"EXCEPTION\n..." ) ;
+		err.debug() ;
+		return HR_ABORT ;
 	}
 
-	return HR_ABORT ; //ALBY TO DO return S_OK
+	return HR_ABORT ; 
+}
+
+BOOL CALLBACK 
+assemblyShelllPropertyPage::MyDlgProc( HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam )
+{
+	BOOL rc = FALSE ;
+
+	switch( msg )
+	{
+		case WM_INITDIALOG:
+		{ 
+			auto p = (PROPSHEETPAGEW*) lParam ;
+			::SetWindowLong( hwnd, GWLP_USERDATA, (LONG) p->lParam ) ;
+
+			auto pstr = (std::wstring*) p->lParam ;
+			std::wstring str( *pstr ) ;
+			delete pstr ;
+
+			::SetDlgItemTextW( hwnd, IDC_EDIT1, str.c_str() ) ; 
+			return TRUE ;
+		}
+
+		case WM_NOTIFY:
+		{
+			/*
+			auto phdr = (NMHDR*) lParam ;
+			switch( phdr->code )
+			{
+				default: break ;
+			}
+			*/			
+			break ;
+		}
+
+		case WM_COMMAND: 
+		{			
+			switch( LOWORD(wParam) )
+			{
+				case IDC_EDIT1:
+					::SendDlgItemMessage( hwnd, IDC_EDIT1, EM_SETSEL, -1, -1 ) ;
+					return 0 ;
+
+				break ;
+			}
+			break;
+		}
+
+		default: break ;
+	}
+
+	return rc ;
 }
 
 STDMETHODIMP

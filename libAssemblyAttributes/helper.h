@@ -24,6 +24,9 @@ namespace alby
 					static std::map<std::wstring, std::wstring> 
 					toMap( const std::wstring, wchar_t majorDelim, wchar_t minorDelim ) ;
 
+					static std::wstring
+					helper::mapToString( std::map<std::wstring, std::wstring> map ) ;
+
 					static std::wstring 
 					getDateTime() ;
 

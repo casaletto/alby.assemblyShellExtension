@@ -18,6 +18,7 @@ namespace alby
 					
 					SIZE_T getBytes() ;
 					void clear() ;
+					HGLOBAL detach();
 
 					template <typename T>
 					T getHandle()

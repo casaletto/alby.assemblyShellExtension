@@ -15,9 +15,6 @@ namespace lib = alby::assemblyAttributes::lib ;
 // run as admin:
 // regsvr32 /s    alby.assemblyShellExtension.dll
 // regsvr32 /u /s alby.assemblyShellExtension.dll
-//ALBY https://msdn.microsoft.com/en-us/library/windows/desktop/ff485839(v=vs.85).aspx
-
-//ALBY to do http[s] thing
 
 void testLoadedModules() ;
 void testUtf8();

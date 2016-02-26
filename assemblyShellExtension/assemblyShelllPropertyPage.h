@@ -14,20 +14,21 @@ class ATL_NO_VTABLE assemblyShelllPropertyPage :
 {
 protected:
 	std::map<std::wstring, std::wstring> _dic ;
+	std::wstring						 _uiString ;
 
 public:
 	assemblyShelllPropertyPage() ;
 
-DECLARE_REGISTRY_RESOURCEID(IDR_ASSEMBLYSHELLLPROPERTYPAGE)
-DECLARE_NOT_AGGREGATABLE(assemblyShelllPropertyPage)
+	DECLARE_REGISTRY_RESOURCEID(IDR_ASSEMBLYSHELLLPROPERTYPAGE)
+	DECLARE_NOT_AGGREGATABLE(assemblyShelllPropertyPage)
 
-BEGIN_COM_MAP(assemblyShelllPropertyPage)
-	COM_INTERFACE_ENTRY(IassemblyShelllPropertyPage)
-	COM_INTERFACE_ENTRY(IShellExtInit)
-	COM_INTERFACE_ENTRY(IShellPropSheetExt)
-END_COM_MAP()
+	BEGIN_COM_MAP(assemblyShelllPropertyPage)
+		COM_INTERFACE_ENTRY(IassemblyShelllPropertyPage)
+		COM_INTERFACE_ENTRY(IShellExtInit)
+		COM_INTERFACE_ENTRY(IShellPropSheetExt)
+	END_COM_MAP()
 
-DECLARE_PROTECT_FINAL_CONSTRUCT()
+	DECLARE_PROTECT_FINAL_CONSTRUCT()
 
 	HRESULT FinalConstruct() ;
 	void	FinalRelease() ;
@@ -47,6 +48,8 @@ DECLARE_PROTECT_FINAL_CONSTRUCT()
 		  EXPPS uPageID,
 		  LPFNSVADDPROPSHEETPAGE pfnReplaceWith,
 		  LPARAM lParam) ;
+
+	static BOOL CALLBACK MyDlgProc( HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam ) ;
 
 } ;
 

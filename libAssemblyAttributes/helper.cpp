@@ -71,6 +71,22 @@ helper::toMap( const std::wstring str, wchar_t majorDelim, wchar_t minorDelim )
 	return dic ;
 }
 
+std::wstring
+helper::mapToString( std::map<std::wstring, std::wstring> map ) 
+{
+	std::wstring str ;
+
+	for ( auto k : map )
+	{ 
+		auto tmp = lib::sprintf( k.first, ":\r\n", k.second ).ws() ;
+		tmp = lib::stringHelper::trim( tmp ) ;
+
+		str = lib::sprintf( str, tmp, L"\r\n\r\n" ).ws() ;
+	}
+
+	return lib::stringHelper::trim( str ) ;
+}
+
 std::wstring 
 helper::getDateTime()
 {

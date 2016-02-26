@@ -8,7 +8,7 @@ using namespace alby::assemblyAttributes::lib ;
 
 globalAlloc::globalAlloc( SIZE_T bytes )
 {
-	auto msg = lib::sprintf( L"globalAlloc [const]" ) ;
+	//auto msg = lib::sprintf( L"globalAlloc [const]" ) ;
 	//msg.debug();
 
 	_bytes = bytes ;
@@ -20,7 +20,7 @@ globalAlloc::globalAlloc( SIZE_T bytes )
 
 globalAlloc::~globalAlloc() 
 {
-	auto msg = lib::sprintf( L"globalAlloc [destr]" ) ;
+	//auto msg = lib::sprintf( L"globalAlloc [destr]" ) ;
 	//msg.debug();
 
 	if ( _handle != NULL )
@@ -38,4 +38,13 @@ globalAlloc::clear()
 {
 	if ( _handle != NULL )
 		::ZeroMemory( _handle, _bytes ) ;
+}
+
+HGLOBAL
+globalAlloc::detach()
+{
+	auto h = _handle ;
+	_handle = NULL ;
+
+	return h ;
 }
