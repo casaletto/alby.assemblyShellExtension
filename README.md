@@ -70,8 +70,7 @@ you don't run it, it's a plug in to explorer.
 
 - right click on a .net .exe or .dll in windows explorer
 - click properties
-- click on the new tab titled "alby.NET"
-- [here's what it looks like](https://raw.githubusercontent.com/casaletto/alby.assemblyShellExtension/master/doc/theFinishedProduct.png)
+- click on the tab titled alby.NET
 
 
 # what does it look like?
