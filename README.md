@@ -74,6 +74,11 @@ you don't run it, it's a plug in to explorer.
 - [here's what it looks like](https://raw.githubusercontent.com/casaletto/alby.assemblyShellExtension/master/doc/theFinishedProduct.png)
 
 
+# what does it look like?
+
+![here's what it looks like](https://raw.githubusercontent.com/casaletto/alby.assemblyShellExtension/master/doc/theFinishedProduct.png)
+
+
 # what's an example of running the test program?
 
     bin\alby.testAssemblyAttributes.exe "bin\alby.assemblyAttributes.exe" "C:\Program Files\Microsoft Visual Studio 12.0\Common7\IDE\Xml\Microsoft.XslDebugger.dll"
