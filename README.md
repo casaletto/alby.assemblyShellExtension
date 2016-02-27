@@ -96,7 +96,7 @@ you don't run it, it's a plug in to explorer.
 
 # bibliography
 
-    https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx
+    (https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx)
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067(v=vs.85).aspx
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106(v=vs.85).aspx
     https://msdn.microsoft.com/en-us/library/windows/desktop/hh127448(v=vs.85).aspx
