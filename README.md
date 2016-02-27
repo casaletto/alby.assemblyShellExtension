@@ -100,7 +100,8 @@ you don't run it, it's a plug in to explorer
 
 
     https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499.aspx
-https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067.aspx
+	
+    https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067.aspx
 https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106.aspx
 https://msdn.microsoft.com/en-us/library/windows/desktop/hh127448.aspx
 http://www.codeproject.com/Articles/441/The-Complete-Idiot-s-Guide-to-Writing-Shell-Extens
