@@ -39,7 +39,7 @@ a C++ test program
 	
 # what's the bitness?
 
-- all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS.*
+- all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS*
 
 
 # how do i install it?
@@ -66,7 +66,7 @@ run as admin
 
 # how do i run it?
 
-you don't run it, it's a plug in to explorer.
+you don't run it, it's a plug in to explorer
 
 - right click on a .net .exe or .dll in windows explorer
 - click properties
@@ -96,7 +96,9 @@ you don't run it, it's a plug in to explorer.
 
 # bibliography
 
-    (https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx)
+- the following links were very helpful in learning how to write this shell extension
+
+    [https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx)
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067(v=vs.85).aspx
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106(v=vs.85).aspx
     https://msdn.microsoft.com/en-us/library/windows/desktop/hh127448(v=vs.85).aspx
