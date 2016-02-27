@@ -98,6 +98,7 @@ you don't run it, it's a plug in to explorer
 
 - the following links were very helpful in learning how to write this shell extension
 
+
     [https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx](https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499(v=vs.85).aspx)
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067(v=vs.85).aspx
     https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106(v=vs.85).aspx
