@@ -39,7 +39,7 @@ a C++ test program
 	
 # what's the bitness?
 
-- all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS*
+all binaries produced are 64 bit only. *I don't do 32 bit, it's 2016 FFS*
 
 
 # how do i install it?
@@ -96,18 +96,16 @@ you don't run it, it's a plug in to explorer
 
 # bibliography
 
-- the following links were very helpful in learning how to write this shell extension
+the following links were very helpful in learning how to write this shell extension
 
-
-    https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499.aspx
-	
-    https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067.aspx
-https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106.aspx
-https://msdn.microsoft.com/en-us/library/windows/desktop/hh127448.aspx
-http://www.codeproject.com/Articles/441/The-Complete-Idiot-s-Guide-to-Writing-Shell-Extens
-http://www.codeproject.com/Articles/463/The-Complete-Idiots-Guide-to-Writing-Shell-Exten
-https://msdn.microsoft.com/en-us/library/windows/desktop/bb774548.aspx
-https://powerext.codeplex.com
+- https://msdn.microsoft.com/en-us/library/windows/desktop/ms682499.aspx	
+- https://msdn.microsoft.com/en-us/library/windows/desktop/cc144067.aspx
+- https://msdn.microsoft.com/en-us/library/windows/desktop/cc144106.aspx
+- https://msdn.microsoft.com/en-us/library/windows/desktop/hh127448.aspx
+- http://www.codeproject.com/Articles/441/The-Complete-Idiot-s-Guide-to-Writing-Shell-Extens
+- http://www.codeproject.com/Articles/463/The-Complete-Idiots-Guide-to-Writing-Shell-Exten
+- https://msdn.microsoft.com/en-us/library/windows/desktop/bb774548.aspx
+- https://powerext.codeplex.com
 
 
 # alby's best bet on wide character set usage in C++ on windows
