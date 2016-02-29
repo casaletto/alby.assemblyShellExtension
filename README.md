@@ -88,7 +88,8 @@ you don't run it, it's a plug in to explorer
 # what was this developed and tested on?
 
 - visual studio 2013
-- window 8
+- windows 8.1 version 6.3.9600
+- windows server 2012 r2 version 6.3.9600
 - not tested on any other windows operating system, so *caveat emptor*
 
 # what's the licence ?
