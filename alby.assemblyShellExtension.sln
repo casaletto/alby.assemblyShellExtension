@@ -8,6 +8,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testAssemblyAttributes", "testAssemblyAttributes\testAssemblyAttributes.vcxproj", "{4F4B6053-1B90-410F-8690-13519168ABC1}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5448EB09-4212-43A7-85DF-8B35D07685AA} = {5448EB09-4212-43A7-85DF-8B35D07685AA}
+		{74BDA228-4DCA-40E6-8E4A-90F7FB23FC46} = {74BDA228-4DCA-40E6-8E4A-90F7FB23FC46}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAssemblyAttributes", "libAssemblyAttributes\libAssemblyAttributes.vcxproj", "{5448EB09-4212-43A7-85DF-8B35D07685AA}"
@@ -16,9 +17,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libAssemblyAttributes", "li
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "assemblyShellExtension", "assemblyShellExtension\assemblyShellExtension.vcxproj", "{74BDA228-4DCA-40E6-8E4A-90F7FB23FC46}"
-	ProjectSection(ProjectDependencies) = postProject
-		{4F4B6053-1B90-410F-8690-13519168ABC1} = {4F4B6053-1B90-410F-8690-13519168ABC1}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

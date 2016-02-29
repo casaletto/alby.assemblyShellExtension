@@ -56,14 +56,14 @@ into the same folder
 
 then run as admin
 
-    regsvr32 alby.assemblyShellExtension.dll
+    regsvr32 bin\alby.assemblyShellExtension.dll
 
 
 # how do i uninstall it?
 
 run as admin
 
-    regsvr32 /u alby.assemblyShellExtension.dll
+    regsvr32 /u bin\alby.assemblyShellExtension.dll
 
 
 # how do i run it?
