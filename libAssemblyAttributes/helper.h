@@ -9,8 +9,9 @@ namespace alby
 			class helper
 			{
 				public:
-					static const std::wstring CSHARP_ASSEMBLY_ATTRIBUTES_EXE ; 
-					static const int EXTENTED_MAX_PATH = 32767 ;
+					static const std::wstring CSHARP_ASSEMBLY_ATTRIBUTES_EXE_64 ; 
+					static const std::wstring CSHARP_ASSEMBLY_ATTRIBUTES_EXE_32 ;
+					static const int EXTENTED_MAX_PATH = 32767;
 
 					helper();
 					virtual ~helper();

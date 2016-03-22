@@ -16,7 +16,10 @@ helper::~helper()
 }
 
 const std::wstring 
-helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE = L"alby.assemblyAttributes.exe" ;
+helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE_64 = L"alby.assemblyAttributes.exe" ;
+
+const std::wstring
+helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE_32 = L"alby.assemblyAttributes32.exe";
 
 std::vector<std::wstring> 
 helper::argvToVector( int argc, wchar_t* argv[] )

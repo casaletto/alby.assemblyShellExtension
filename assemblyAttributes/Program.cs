@@ -27,13 +27,14 @@ namespace alby.assemblyAttributes
 				{
 					var filename = args[0] ;
 					var fullpath = Path.GetFullPath( filename ) ;
-					dic.Add( "Path", fullpath ) ;
+					dic.Add( "AssemblyPath", fullpath ) ;
 
 					ass = Assembly.LoadFile( fullpath ) ;
 				}
 
 				dic.Add( "AssemblyVersion", ass.GetName().Version.ToString() ) ;
 				dic.Add( "AssemblyFullName", ass.FullName );
+				dic.Add( "AssemblyProcessorArchitecture", ass.GetName().ProcessorArchitecture.ToString() ) ;
 
 				ass.GetCustomAttributesData().ToList().ForEach(i =>
 				{

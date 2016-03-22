@@ -95,17 +95,34 @@ assemblyShelllPropertyPage::Initialize
 
 		// get current folder to find exe path
 		auto folder = lib::helper::getCurrentModuleDirectory() ;
-		auto exe    = lib::sprintf( folder, L"\\", lib::helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE ) ; 
+		auto exe64  = lib::sprintf( folder, L"\\", lib::helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE_64 ) ; 
+		auto exe32  = lib::sprintf( folder, L"\\", lib::helper::CSHARP_ASSEMBLY_ATTRIBUTES_EXE_32 ) ; 
 
-		// call the child .net process
-		lib::process pr ;
-		auto rc = pr.exec( exe.ws(), filename ) ;
+		// call the child .net process, 64 bit version
+		lib::process pr64 ;
+		auto rc = pr64.exec( exe64.ws(), filename ) ;
 
-		auto theStdout = lib::stringHelper::trim( pr.getStdout() ) ;
-		auto theStderr = lib::stringHelper::trim( pr.getStderr() ) ;
+		auto theStdout = lib::stringHelper::trim( pr64.getStdout() ) ;
+		auto theStderr = lib::stringHelper::trim( pr64.getStderr() ) ;
 
-		msg = lib::sprintf( L"rc [", rc, L"]" ) ;
+		msg = lib::sprintf( L"rc 64 [", rc, L"]" ) ;
 		msg.debug();
+
+		// may have failed due to bad bitness
+		auto badImageException = ( rc != 0 ) && lib::stringHelper::contains( theStderr, L"System.BadImageFormatException" ) ;
+
+		// call the child .net process, 32 bit version
+		if ( badImageException )
+		{
+			lib::process pr32 ;
+			rc = pr32.exec( exe32.ws(), filename ) ;
+
+			theStdout = lib::stringHelper::trim( pr32.getStdout() ) ;
+			theStderr = lib::stringHelper::trim( pr32.getStderr() ) ;
+
+			msg = lib::sprintf( L"rc 32 [", rc, L"]" ) ;
+			msg.debug() ;
+		}
 
 		if ( ! theStderr.empty()  )
 			  throw lib::exception( theStderr, __FILE__, __LINE__);

@@ -19,15 +19,16 @@ a C++ ATL COM windows explorer shell extension dll
     bin\alby.assemblyShellExtension.dll 
 
 	
-a  C#.net dll that reflects other .net assemblies, provides attribute information to the dll above
+a C#.net dll that reflects other .net assemblies, provides attribute information to the dll above (and a 32 bit version for loading x86 processor architecture assemblies)
 
     bin\alby.assemblyAttributes.exe 
+    bin\alby.assemblyAttributes32.exe 
 
-	
-and the required configuration file for the above C# dll
+
+and the required configuration files for the above C# dlls
 
     bin\alby.assemblyAttributes.exe.config
-
+    bin\alby.assemblyAttributes32.exe.config
 
 
 # any other artifacts?
@@ -37,20 +38,15 @@ a C++ test program
     bin\alby.testAssemblyAttributes.exe 
 
 	
-# what's the bitness?
-
-all binaries produced are 64 bit only
-
-*I don't do 32 bit, it's 2016 FFS*
-
-
 # how do i install it?
 
 put the following files 
 
     bin\alby.assemblyAttributes.exe
     bin\alby.assemblyAttributes.exe.config
-    bin\alby.assemblyShellExtension.dll 
+    bin\alby.assemblyAttributes32.exe
+    bin\alby.assemblyAttributes32.exe.config    
+	bin\alby.assemblyShellExtension.dll 
 
 into the same folder 
 

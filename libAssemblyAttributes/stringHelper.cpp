@@ -118,7 +118,7 @@ stringHelper::endsWith( const std::wstring& str, const std::wstring& suffix, boo
 bool
 stringHelper::startsWith( const std::wstring& str, const std::wstring& prefix, bool caseSensitive )
 {
-	if ( str.empty()               ) return false ;
+	if ( str.empty()                ) return false ;
 	if ( prefix.empty()             ) return false ;
 	if ( prefix.size() > str.size() ) return false ;
 
@@ -136,6 +136,27 @@ stringHelper::startsWith( const std::wstring& str, const std::wstring& prefix, b
 	if ( pos2 == std::wstring::npos ) return false ;
 
 	return pos2 == 0 ;
+}
+
+bool
+stringHelper::contains( const std::wstring& str, const std::wstring& subString, bool caseSensitive )
+{
+	if ( str.empty()                   ) return false ;
+	if ( subString.empty()             ) return true  ;
+	if ( subString.size() > str.size() ) return false ;
+
+	auto str2       = std::move( str       ) ;
+	auto subString2 = std::move( subString ) ;
+
+	if ( ! caseSensitive ) // case insensitive, convert to upper case
+	{
+		str2		= stringHelper::toUpper( str2       ) ;
+		subString2	= stringHelper::toUpper( subString2 ) ;
+	}
+
+	auto pos2 = str2.find( subString2 ) ;
+
+	return pos2 != std::wstring::npos ;
 }
 
 std::wstring 
