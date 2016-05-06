@@ -186,6 +186,7 @@
       <DebugInformationFormat>
       </DebugInformationFormat>
       <SuppressStartupBanner>false</SuppressStartupBanner>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Midl>
       <MkTypLibCompatible>false</MkTypLibCompatible>
