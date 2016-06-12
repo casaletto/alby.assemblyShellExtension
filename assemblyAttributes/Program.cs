@@ -11,6 +11,9 @@ namespace alby.assemblyAttributes
 {
 	public class Program
 	{
+		public static string __filename = "" ;
+		public static string __fullpath = "" ;
+
 		public static int Main( string[] args )
 		{
 			Console.OutputEncoding = Encoding.UTF8 ;
@@ -19,33 +22,22 @@ namespace alby.assemblyAttributes
 
 			try
 			{
-				AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
+				if ( args.Length == 0 )
+					 throw new Exception( "usage: alby.assemblyAttributes [assemblyFullPath]" )  ;
 
-				var dic = new Dictionary<string, string> { };
+				AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve ;
 
-				var ass = Assembly.GetExecutingAssembly();
+				__filename = args[0] ;
+				__fullpath = Path.GetFullPath( __filename ) ;
 
-				if ( args.Length >= 1 )
-				{
-					var filename = args[0] ;
-					var fullpath = Path.GetFullPath( filename ) ;
-					dic.Add( "AssemblyPath", fullpath ) ;
+				var ass = Assembly.LoadFile( __fullpath ) ;
 
-					try
-					{
-						ass = Assembly.LoadFrom( new Uri( fullpath ).AbsoluteUri ) ;
-					}
-					catch( FileNotFoundException ex )
-					{
-						sd.Trace.WriteLine( ex.ToString() ) ;
+				var dic = new Dictionary<string, string> {} ;
 
-						ass = Assembly.LoadFile( fullpath ) ;
-					}
-				}
-
-				dic.Add( "AssemblyVersion", ass.GetName().Version.ToString() ) ;
-				dic.Add( "AssemblyFullName", ass.FullName );
-				dic.Add( "AssemblyProcessorArchitecture", ass.GetName().ProcessorArchitecture.ToString() ) ;
+				dic.Add( "AssemblyPath",					__fullpath ) ;
+				dic.Add( "AssemblyVersion",					ass.GetName().Version.ToString() ) ;
+				dic.Add( "AssemblyFullName",				ass.FullName ) ;
+				dic.Add( "AssemblyProcessorArchitecture",	ass.GetName().ProcessorArchitecture.ToString() ) ;
 
 				ass.GetCustomAttributesData().ToList().ForEach(i =>
 				{
@@ -84,13 +76,39 @@ namespace alby.assemblyAttributes
 				Console.Out.Flush();
 				Console.Error.Flush();
 
-				sd.Trace.WriteLine("alby.assemblyAttributes [finish]");				
+				sd.Trace.WriteLine( "alby.assemblyAttributes [finish]" ) ;				
 			}
 
 		} // end main
 
-		public static Assembly AssemblyResolve(object src, ResolveEventArgs a )
-		{ 
+		public static Assembly AssemblyResolve( object src, ResolveEventArgs rea )
+		{
+			sd.Trace.WriteLine( "[resolve] " + rea.Name ) ;
+
+			if ( string.IsNullOrWhiteSpace( __fullpath ) ) return null ;
+
+			var folder = Path.GetDirectoryName( __fullpath ) ;
+
+			var files = Directory.GetFiles( folder, "*.*", SearchOption.AllDirectories )
+								 .Where( f => f.ToUpper().EndsWith( ".DLL" ) || 
+											  f.ToUpper().EndsWith( ".EXE" ) ) ;
+			foreach( var file in files )
+			{
+				try
+				{
+					var assemblyName = AssemblyName.GetAssemblyName( file ) ;
+					if ( rea.Name == assemblyName.ToString() )
+					{
+						sd.Trace.WriteLine( "[resolved] " + file ) ;
+						return Assembly.LoadFile( file ) ;
+					}
+				}
+				catch( Exception ex )
+				{
+					sd.Trace.WriteLine( ex.ToString() ) ;				
+				}
+			}
+
 			return null ;
 		}
 
