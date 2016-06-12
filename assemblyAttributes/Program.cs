@@ -11,15 +11,17 @@ namespace alby.assemblyAttributes
 {
 	public class Program
 	{
-		static int Main( string[] args )
+		public static int Main( string[] args )
 		{
 			Console.OutputEncoding = Encoding.UTF8 ;
 
-			sd.Trace.WriteLine("alby.assemblyAttributes [start]");
+			sd.Trace.WriteLine( "alby.assemblyAttributes [start]" ) ;
 
 			try
 			{
-				var dic = new Dictionary<string, string> {} ;
+				AppDomain.CurrentDomain.AssemblyResolve += AssemblyResolve;
+
+				var dic = new Dictionary<string, string> { };
 
 				var ass = Assembly.GetExecutingAssembly();
 
@@ -29,7 +31,16 @@ namespace alby.assemblyAttributes
 					var fullpath = Path.GetFullPath( filename ) ;
 					dic.Add( "AssemblyPath", fullpath ) ;
 
-					ass = Assembly.LoadFile( fullpath ) ;
+					try
+					{
+						ass = Assembly.LoadFrom( new Uri( fullpath ).AbsoluteUri ) ;
+					}
+					catch( FileNotFoundException ex )
+					{
+						sd.Trace.WriteLine( ex.ToString() ) ;
+
+						ass = Assembly.LoadFile( fullpath ) ;
+					}
 				}
 
 				dic.Add( "AssemblyVersion", ass.GetName().Version.ToString() ) ;
@@ -77,6 +88,12 @@ namespace alby.assemblyAttributes
 			}
 
 		} // end main
-	}
+
+		public static Assembly AssemblyResolve(object src, ResolveEventArgs a )
+		{ 
+			return null ;
+		}
+
+	} // end class
 }
 

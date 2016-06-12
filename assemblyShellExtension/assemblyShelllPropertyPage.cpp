@@ -87,6 +87,8 @@ assemblyShelllPropertyPage::Initialize
 		::DragQueryFileW( hdrop.getPointer<HDROP>(), 0, sz, lib::helper::EXTENTED_MAX_PATH ) ;
 		filename = sz ;
 
+		//ALBY auto directory = lib::helper::getDirectoryFromPath( filename ) ;
+
 		// file name suffix must in [ .dll .exe ]
 		auto ok = lib::stringHelper::endsWith( filename, L".dll", false ) ||
 				  lib::stringHelper::endsWith( filename, L".exe", false ) ;
@@ -100,7 +102,7 @@ assemblyShelllPropertyPage::Initialize
 
 		// call the child .net process, 64 bit version
 		lib::process pr64 ;
-		auto rc = pr64.exec( exe64.ws(), filename ) ;
+		auto rc = pr64.exec( exe64.ws(), L"", filename ) ;
 
 		auto theStdout = lib::stringHelper::trim( pr64.getStdout() ) ;
 		auto theStderr = lib::stringHelper::trim( pr64.getStderr() ) ;
@@ -115,7 +117,7 @@ assemblyShelllPropertyPage::Initialize
 		if ( badImageException )
 		{
 			lib::process pr32 ;
-			rc = pr32.exec( exe32.ws(), filename ) ;
+			rc = pr32.exec( exe32.ws(), L"", filename ) ;
 
 			theStdout = lib::stringHelper::trim( pr32.getStdout() ) ;
 			theStderr = lib::stringHelper::trim( pr32.getStderr() ) ;

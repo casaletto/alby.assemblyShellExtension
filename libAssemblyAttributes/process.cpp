@@ -36,7 +36,7 @@ void process::setStderr( const std::wstring& str)
 	this->_stderr = str ;
 }
 
-int process::exec( const std::wstring& exe, const std::wstring& parameter ) 
+int process::exec( const std::wstring& exe, const std::wstring& directory, const std::wstring& parameter ) 
 {
 	this->setStdout( std::wstring() ) ;
 	this->setStderr( std::wstring() ) ;
@@ -49,8 +49,9 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 
 	// format command line with quotes "exe" "param"
 	auto q = L"\"" ;
-	auto cmdline = lib::sprintf(q, exe, q, L" ", q, parameter, q);
+	auto cmdline = lib::sprintf( q, exe, q, L" ", q, parameter, q ) ;
 	cmdline.debug() ;
+	
 
 	// create the pipes
 	HANDLE hChildStdoutRead  ;
@@ -113,13 +114,13 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 		TRUE, // inherit handles
 		0, 
 		NULL,
-		NULL,
+		directory.length() > 0 ? (LPWSTR) directory.c_str() : NULL, // change current folder if asked to, also works for unc paths !
 		&si,
 		&pi
 	) ;
 
 	if ( b == 0 )
-		throw lib::exception(L"CreateProcessW() failed.", __FILE__, __LINE__);
+		 throw lib::exception( L"CreateProcessW() failed.", __FILE__, __LINE__ ) ;
 
 	// safe handle cleanup
 	lib::handle handleProcess( pi.hProcess ) ;
@@ -137,13 +138,13 @@ int process::exec( const std::wstring& exe, const std::wstring& parameter )
 
 	this->getProcessOutput( hChildStdoutRead, hChildStderrRead, strStdout, strStderr ) ;
 
-	this->setStdout( lib::stringHelper::s2ws(strStdout));
-	this->setStderr( lib::stringHelper::s2ws(strStderr));
+	this->setStdout( lib::stringHelper::s2ws(strStdout) ) ;
+	this->setStderr( lib::stringHelper::s2ws(strStderr) ) ;
 
 	// wait for child process exit
 	DWORD rc = 1 ;
-	::WaitForSingleObject(pi.hProcess, INFINITE);
-	::GetExitCodeProcess( pi.hProcess, &rc ) ;
+	::WaitForSingleObject( pi.hProcess, INFINITE ) ;
+	::GetExitCodeProcess ( pi.hProcess, &rc ) ;
 
 	return rc ;
 }

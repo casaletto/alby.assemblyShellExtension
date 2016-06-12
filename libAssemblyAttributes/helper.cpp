@@ -173,7 +173,15 @@ helper::getLoadedModules( HANDLE hProcess )
 	return list ;
 }
 
+std::wstring
+helper::getDirectoryFromPath( const std::wstring& filename )
+{
+	auto directory = filename ;
+	
+	::PathRemoveFileSpecW( (LPWSTR) directory.c_str() ) ; // this also works for unc paths !
 
+	return directory ;
+}
 
 
 

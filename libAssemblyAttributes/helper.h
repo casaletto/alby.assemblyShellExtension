@@ -36,6 +36,9 @@ namespace alby
 
 					static std::vector<std::wstring>
 					getLoadedModules( HANDLE hProcess ) ;
+
+					static std::wstring
+					getDirectoryFromPath( const std::wstring& path ) ;
 			} ;
 		
 		} // ns lib

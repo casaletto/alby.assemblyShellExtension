@@ -23,7 +23,7 @@ namespace alby
 					process() ;
 					virtual ~process() ;
 
-					int exec( const std::wstring& exe, const std::wstring& parameter ) ;
+					int exec( const std::wstring& exe, const std::wstring& directory, const std::wstring& parameter ) ;
 
 					std::wstring getStdout() ;
 					std::wstring getStderr() ;

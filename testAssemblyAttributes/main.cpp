@@ -11,12 +11,13 @@
 
 namespace lib = alby::assemblyAttributes::lib ;
 
-//ALBY put in the  git attributes, and upload the picture to git hub 
-
-//ALBY notes:
-// run as admin:
-// regsvr32 /s    alby.assemblyShellExtension.dll
-// regsvr32 /u /s alby.assemblyShellExtension.dll
+// installation notes
+//
+// run in a dos box as admin 
+//
+// install:		regsvr32 /s    alby.assemblyShellExtension.dll
+// uninstall:	regsvr32 /u /s alby.assemblyShellExtension.dll
+//
 
 void testLoadedModules() ;
 void testUtf8();
@@ -123,7 +124,7 @@ void testGetAssemblyAttributes( int argc, wchar_t* argv[] )
 	h.getArguments(args, exe, parameter);
 
 	// call the child .net process
-	auto childrc = pr.exec(exe, parameter);
+	auto childrc = pr.exec( exe, L"", parameter ) ;
 
 	// get output from child .net process
 	auto theStdout = lib::stringHelper::trim(pr.getStdout());
