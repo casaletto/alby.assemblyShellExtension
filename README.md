@@ -31,7 +31,7 @@ and the required configuration files for the above C# dlls
     bin\alby.assemblyAttributes32.exe.config
 
 
-# any other artifacts?
+# any other artifacts ?
 
 a C++ test program
 
