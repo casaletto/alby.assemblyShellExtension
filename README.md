@@ -45,7 +45,7 @@ put the following files
     bin\alby.assemblyAttributes.exe
     bin\alby.assemblyAttributes.exe.config
     bin\alby.assemblyAttributes32.exe
-    bin\alby.assemblyAttributes32.exe.config    
+    bin\alby.assemblyAttributes32.exe.config
 	bin\alby.assemblyShellExtension.dll 
 
 into the same folder 
