@@ -38,7 +38,7 @@ a C++ test program
     bin\alby.testAssemblyAttributes.exe 
 
 	
-# how do i install it?
+# how do i install it  ?
 
 put the following files 
 
