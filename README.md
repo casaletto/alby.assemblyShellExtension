@@ -12,7 +12,7 @@ visual studio 2013
     msbuild alby.assemblyShellExtension.sln /t:Clean,Rebuild /p:Configuration=Release /p:Platform=x64
 
 
-# what are the key artifacts?
+# what are the key artifacts ?
 
 a C++ ATL COM windows explorer shell extension dll
 
