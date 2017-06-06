@@ -55,14 +55,14 @@ then run as admin
     regsvr32 bin\alby.assemblyShellExtension.dll
 
 
-# how do i uninstall it?
+# how do i uninstall it ?
 
 run as admin
 
     regsvr32 /u bin\alby.assemblyShellExtension.dll
 
 
-# how do i run it?
+# how do i run it ?
 
 you don't run it, it's a plug in to explorer
 
