@@ -117,3 +117,6 @@ the following links were very helpful in learning how to write this windows shel
 - repeat: never ever pipe unicode/utf16 std::wstrings to any io. instead, convert to utf8 std::strings and pipe to std::cout
 
 
+
+
+
