@@ -7,7 +7,7 @@ an extension to windows explorer to let you see .net assembly attributes in the 
 
 # how do i build it?
 
-visual studio 2013
+visual studio 2017
 
     msbuild alby.assemblyShellExtension.sln /t:Clean,Rebuild /p:Configuration=Release /p:Platform=x64
 
@@ -84,11 +84,24 @@ you don't run it, it's a plug in to explorer
 # what was this developed and tested on?
 
 - visual studio 2013
-- windows 8.1 version 6.3.9600
+- visual studio 2017
+- windows 8.1 version  6.3.9600
+- windows 10  version 10.0.15063
 - windows server 2012 r2 version 6.3.9600
 - not tested on any other windows operating system, so *caveat emptor*
 
-# what's the licence ?
+
+# tell me some other super nerdy details
+
+- version 1.0.0.5
+- .net framework 4.5.1
+- platform toolset visual studio 2017 (v141)
+- windows sdk 8.1
+- #define _WIN32_WINNT _WIN32_WINNT_WIN8 
+- #define WINVER	   _WIN32_WINNT
+
+
+# what's the licence?
 
 - [the MIT licence](https://opensource.org/licenses/MIT)
 

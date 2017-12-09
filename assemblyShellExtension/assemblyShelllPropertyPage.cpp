@@ -21,26 +21,41 @@ assemblyShelllPropertyPage::assemblyShelllPropertyPage()
 	//msg.debug();
 }
 
-HRESULT assemblyShelllPropertyPage::FinalConstruct()
+HRESULT 
+assemblyShelllPropertyPage::FinalConstruct()
 {
-	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [final constructor]");
-	msg.debug();
+	auto msg = lib::sprintf( L"assemblyShelllPropertyPage [final constructor]" ) ;
+	msg.debug() ;
 
-	return S_OK;
+	msg = lib::sprintf( L"assemblyShelllPropertyPage _WIN32_WINNT=0x", 
+						std::setw(4), 
+						std::setfill( (WCHAR) '0' ), 
+						std::hex, 
+						_WIN32_WINNT ) ;
+	msg.debug() ;
+
+	msg = lib::sprintf( L"assemblyShelllPropertyPage WINVER=0x", 
+						std::setw(4),
+						std::setfill( (WCHAR) '0' ),
+						std::hex,
+						WINVER ) ; 
+	msg.debug() ;
+
+	return S_OK ;
 }
 
 void 
 assemblyShelllPropertyPage::FinalRelease()
 {
-	auto msg = lib::sprintf(L"assemblyShelllPropertyPage [final release]");
-	msg.debug();
+	auto msg = lib::sprintf( L"assemblyShelllPropertyPage [final release]" ) ;
+	msg.debug() ;
 }
 
 STDMETHODIMP 
 assemblyShelllPropertyPage::HelloWorld( BSTR aString, BSTR* returnedBStr)
 {
 	auto msg = lib::sprintf( L"assemblyShelllPropertyPage [HelloWorld]" ) ;
-	msg.debug();
+	msg.debug() ;
 
 	lib::sprintf str( aString, L" ", lib::helper::getDateTime() ) ;
 	str.debug() ;
