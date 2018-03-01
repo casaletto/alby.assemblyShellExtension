@@ -8,15 +8,15 @@ using assemblyAttributes ;
 [assembly: AssemblyConfiguration("alby.assemblyAttributes")]
 [assembly: AssemblyCompany("Casaletto PL")]
 [assembly: AssemblyProduct("alby.assemblyAttributes")]
-[assembly: AssemblyCopyright("© 2016 Casaletto PL. All rights reserved. MIT licence.")]
+[assembly: AssemblyCopyright("© 2017 Casaletto PL. All rights reserved. MIT licence.")]
 [assembly: AssemblyTrademark("Casaletto PL")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("4fef644f-53b6-4bfe-93bf-9328ce6e2147")]
 
-[assembly: AssemblyVersion("1.0.0.4")]
-[assembly: AssemblyFileVersion("1.0.0.4")]
-[assembly: AssemblyInformationalVersion( "1.0.0.4") ]
+[assembly: AssemblyVersion("1.0.0.5")]
+[assembly: AssemblyFileVersion("1.0.0.5")]
+[assembly: AssemblyInformationalVersion( "1.0.0.5") ]
 
 [assembly: MyCustomAssemblyAttribute("Custom attribute text")]
 
