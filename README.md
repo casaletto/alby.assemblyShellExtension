@@ -130,6 +130,47 @@ the following links were very helpful in learning how to write this windows shel
 - repeat: never ever pipe unicode/utf16 std::wstrings to any io. instead, convert to utf8 std::strings and pipe to std::cout
 
 
+# github and ssh on ubuntu
+
+- get the gnome keyring thing happening
+
+	sudo apt-get install libgnome-keyring-dev seahorse
+	sudo make --directory=/usr/share/doc/git/contrib/credential/gnome-keyring
+	git config --global credential.helper /usr/share/doc/git/contrib/credential/gnome-keyring/git-credential-gnome-keyring
+
+- .git/config
+
+    [remote "origin"]
+    url = git@github.com:casaletto/alby.assemblyShellExtension.git
+
+- generate public/private key pair, eg
+
+    ssh-keygen -t rsa -b 4096 -C "email@server.com"
+    id_rsa_email@server.com
+    id_rsa_email@server.com.pub
+
+- copy the private key to ~/.ssh
+- copy the public  key to https://github.com/settings/keys
+- have a look at the key in seahorse
+
+- connectivity test 
+
+    ssh -v -T git@github.com
+    ssh -v -T -p 443 git@ssh.github.com
 
 
+# github and ssh on windows under msys64
+
+- instead of the gnome keyring, start ssh-agent and add the private key to it
+
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/id_rsa_email@server.com
+    ssh-add -L
+
+
+# github and ssh useful links
+
+- https://help.github.com/articles/checking-for-existing-ssh-keys/
+- https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
+- https://help.github.com/articles/adding-a-new-ssh-key-to-your-github-account/
 
